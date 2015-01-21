@@ -1,2 +1,2 @@
 # TaxiManager
-Logiciel pour le management des taxis
+Logiciel pour le management des taxis.
