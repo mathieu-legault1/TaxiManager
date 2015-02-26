@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="a478df0a-3ab8-4bf2-aaf6-75f3c5d6e619" name="ActivityDiagramUC2" linkedPackageId="2bd86226-37fb-40af-ba0d-3b2549254244" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
+  <ownedCommentsInternal>
+    <comment Id="0ead7a59-1ad2-416e-9a31-08ac012956b9">
+      <elementDefinition Id="217a5986-23e9-4131-8d76-a954cd1e46a1" />
+      <body>Définition de trajet
+Acteur : Taxi</body>
+    </comment>
+  </ownedCommentsInternal>
+  <packagedElements>
+    <activityRootModelHasActivity>
+      <activity Id="596c1c9a-24b1-41a9-8ba4-1590682b1ad1" name="ActivityDiagramUC2" isAbstract="false" isLeaf="false" isActiveClass="false" isReentrant="false" isReadOnly="false" isSingleExecution="false">
+        <elementDefinition Id="615b2f20-fd75-4842-a83e-749447be691e" />
+        <nodes>
+          <initialNode Id="c28f8e7c-03ca-4604-89cf-46b66dbcefe5" name="Initial1" isLeaf="false">
+            <elementDefinition Id="85169074-2e56-4361-9081-596f6b779923" />
+            <flowNodeTargets>
+              <controlFlow Id="115aad93-f068-4d51-8c5a-3cbe24d3df87" isLeaf="false">
+                <opaqueActionMoniker Id="80b9e4e1-acc7-49ef-ac88-234a561aa64d" LastKnownName="L'utilisateur se connecte" />
+                <elementDefinition Id="e651e626-ec70-46de-8451-e048824b00a0" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction Id="80b9e4e1-acc7-49ef-ac88-234a561aa64d" name="L'utilisateur se connecte" isLeaf="false">
+            <elementDefinition Id="30af81ed-9408-484e-931d-ad0ff0918b64" />
+            <flowNodeTargets>
+              <controlFlow Id="1f341352-fde1-44bd-82f1-eb2189f29424" isLeaf="false">
+                <opaqueActionMoniker Id="9775d21b-5b32-4eb2-ae9d-0f7d748dc508" LastKnownName="Sélectionne un client sur la carte" />
+                <elementDefinition Id="a3f0b755-8ddd-4abc-add7-a5187569c03a" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="9775d21b-5b32-4eb2-ae9d-0f7d748dc508" name="Sélectionne un client sur la carte" isLeaf="false">
+            <elementDefinition Id="91d7767c-0e89-49e2-a77b-6a8f0ae3bd2e" />
+            <flowNodeTargets>
+              <controlFlow Id="9051ec2a-d501-4abe-b0cb-3a2ef3774a61" isLeaf="false">
+                <decisionNodeMoniker Id="4604f77e-4860-40d3-b7e6-c1ef4c255f1f" LastKnownName="Decision2" />
+                <elementDefinition Id="060ac19c-e660-4e4e-bddb-ca2354bae745" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="d437077e-6b41-42af-a820-639b16f9873b" name="Refuse un client" isLeaf="false">
+            <elementDefinition Id="9ba85607-24e8-4dd4-943f-82c9da69fde0" />
+            <flowNodeTargets>
+              <controlFlow Id="604ad211-4a3b-495d-a757-52d08930184a" isLeaf="false">
+                <opaqueActionMoniker Id="9775d21b-5b32-4eb2-ae9d-0f7d748dc508" LastKnownName="Sélectionne un client sur la carte" />
+                <elementDefinition Id="b6a650d4-52c8-4c55-af05-6f2565dd3ca0" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="4604f77e-4860-40d3-b7e6-c1ef4c255f1f" name="Decision2" isLeaf="false">
+            <elementDefinition Id="c2038b4b-408e-4815-802b-e37b63ef3e1e" />
+            <flowNodeTargets>
+              <controlFlow Id="b4e563fd-96ab-4dcd-8260-98897e29c7a3" isLeaf="false">
+                <opaqueActionMoniker Id="d437077e-6b41-42af-a820-639b16f9873b" LastKnownName="Refuse un client" />
+                <elementDefinition Id="b50f3c97-305c-407f-89e2-264b6f5a4b73" />
+              </controlFlow>
+              <controlFlow Id="0a4467fa-68bd-4556-a03a-28c800cc3802" isLeaf="false">
+                <opaqueActionMoniker Id="08985312-2b5b-4df5-8433-e4106d49b44e" LastKnownName="Accepte un client" />
+                <elementDefinition Id="20d473d6-c789-4f9c-b0ee-893b6d0e8bf5" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction Id="08985312-2b5b-4df5-8433-e4106d49b44e" name="Accepte un client" isLeaf="false">
+            <elementDefinition Id="ad5cd7b4-0c24-47b6-9d1b-8e164dac305b" />
+            <flowNodeTargets>
+              <controlFlow Id="6973267a-914d-49c2-ac78-238aa5cfcdab" isLeaf="false">
+                <opaqueActionMoniker Id="79f0626f-c871-4597-a082-13f29bead4bb" LastKnownName="Route optimale pour récupéré le client" />
+                <elementDefinition Id="db7024d3-fb83-403b-a807-41caa4043ba6" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="79f0626f-c871-4597-a082-13f29bead4bb" name="Route optimale pour récupéré le client" isLeaf="false">
+            <elementDefinition Id="2a3e8eaf-64c5-456e-b89e-ea2f33e6a0f0" />
+            <flowNodeTargets>
+              <controlFlow Id="cc982133-cf24-4681-b279-f612d2c6bf2b" guard="Client récupéré" isLeaf="false">
+                <opaqueActionMoniker Id="37accd7f-369f-429d-8ac6-b0717243ff48" LastKnownName="Route optimale pour arriver à destination" />
+                <elementDefinition Id="635f03e2-14c9-4df8-a5fc-095196d3673a" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="37accd7f-369f-429d-8ac6-b0717243ff48" name="Route optimale pour arriver à destination" isLeaf="false">
+            <elementDefinition Id="c4dde169-824f-460e-a787-9d5483a1fc3b" />
+            <flowNodeTargets>
+              <controlFlow Id="3f40bde0-fbbe-415a-bea7-e5c565581d44" isLeaf="false">
+                <activityFinalNodeMoniker Id="780a9e58-1ca6-4f49-9d76-93a05e0f7835" LastKnownName="ActivityFinal1" />
+                <elementDefinition Id="b3463d7f-d7d9-4a26-8cdd-5f65cbaa87a3" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <activityFinalNode Id="780a9e58-1ca6-4f49-9d76-93a05e0f7835" name="ActivityFinal1" isLeaf="false">
+            <elementDefinition Id="34014d24-7ff1-4c86-9559-d62610a6d966" />
+          </activityFinalNode>
+        </nodes>
+      </activity>
+    </activityRootModelHasActivity>
+  </packagedElements>
+  <package Id="2bd86226-37fb-40af-ba0d-3b2549254244" name="Modeling">
+    <elementDefinition Id="c736f8fc-a070-4a61-bad8-e6dc439523d7" />
+    <profileInstances>
+      <packageHasProfileInstances Id="85f41449-2904-4653-bcab-846d57bbde8e">
+        <profileInstance Id="273148aa-f1d3-4f41-94ef-cbefe8ed7344" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="3a1cbd0a-b76b-4bc5-b714-2674f2dc4594">
+        <profileInstance Id="9f3aa56c-8dce-4533-a791-21fc0c0dc5f9" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</activityRootModel>

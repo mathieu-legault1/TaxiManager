@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner"
+  dslVersion="1.0.0.0"
+  Id="c736f8fc-a070-4a61-bad8-e6dc439523d7"
+  name="Modeling" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <ownedCommentsInternal>
+    <comment
+      Id="5579fa74-a665-4f91-ad6b-20816477faa5">
+      <body>Saisie des clients
+Acteur : Agence</body>
+    </comment>
+    <comment
+      Id="217a5986-23e9-4131-8d76-a954cd1e46a1">
+      <body>Définition de trajet
+Acteur : Taxi</body>
+    </comment>
+  </ownedCommentsInternal>
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
+      <profileInstance
+        Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791"
+        name="StandardProfileL2" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="29349502-908c-4fda-9054-c48619c59ed0">
+      <profileInstance
+        Id="532ea607-fb19-44b8-8502-3351b05452be"
+        name="StandardProfileL3" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <activity
+        Id="09cfd096-ff85-414d-b4c2-30d2d7cd50d8"
+        name="ActivityDiagramUC1"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false"
+        isReentrant="false"
+        isReadOnly="false"
+        isSingleExecution="false">
+        <nodes>
+          <initialNode
+            Id="9ca07260-3d6d-41d0-986b-b3da9dbf7de7"
+            name="Initial1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="96d925df-8961-4f30-9069-714bd1a9f2cd"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="7a65ed86-4d6f-434e-a3fe-9a1a32f8e3a9"
+                  LastKnownName="L'utilisateur se connecte"
+                  LastKnownLocation="Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction
+            Id="7a65ed86-4d6f-434e-a3fe-9a1a32f8e3a9"
+            name="L'utilisateur se connecte"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="6f9a6c3d-2bc7-4733-a6c6-f88d51f5be71"
+                isLeaf="false">
+                <decisionNodeMoniker
+                  Id="f38d1488-e447-48b0-abb3-6af212223df0"
+                  LastKnownName="Decision1"
+                  LastKnownLocation="Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="8d15f5d1-84b7-4b61-b4b9-366f61f48388"
+            name="Entre l'adresse du client manuellement sur la carte"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="7c93a1d7-d489-4c42-92b2-e6ac23277b80"
+                isLeaf="false">
+                <joinNodeMoniker
+                  Id="59f5c35c-d8b8-40d5-a7b4-ae4bb9f232a0"
+                  LastKnownName="Join1"
+                  LastKnownLocation="Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="037fa793-ea02-4d51-8b8b-4dfe4616380b"
+            name="Entre l'adresse du client"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="8d4faeb0-e45a-493f-b7d7-67f0199eac2d"
+                isLeaf="false">
+                <joinNodeMoniker
+                  Id="59f5c35c-d8b8-40d5-a7b4-ae4bb9f232a0"
+                  LastKnownName="Join1"
+                  LastKnownLocation="Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode
+            Id="f38d1488-e447-48b0-abb3-6af212223df0"
+            name="Decision1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="0c4b4540-5792-4a8a-b9f1-3ad80bebae94"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="8d15f5d1-84b7-4b61-b4b9-366f61f48388"
+                  LastKnownName="Entre l'adresse du client manuellement sur la carte"
+                  LastKnownLocation="Modeling.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="285af617-264c-462e-a469-480b21819717"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="037fa793-ea02-4d51-8b8b-4dfe4616380b"
+                  LastKnownName="Entre l'adresse du client"
+                  LastKnownLocation="Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <joinNode
+            Id="59f5c35c-d8b8-40d5-a7b4-ae4bb9f232a0"
+            name="Join1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="7e0857e1-9355-478a-be89-97aef3bcc5eb"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="ab809e30-621f-4c58-918a-f3c247744891"
+                  LastKnownName="Entre les informations pertinentes du client"
+                  LastKnownLocation="Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </joinNode>
+          <opaqueAction
+            Id="ab809e30-621f-4c58-918a-f3c247744891"
+            name="Entre les informations pertinentes du client"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="d0553e99-dad7-4ad9-8a26-c442b4f1988a"
+                isLeaf="false">
+                <activityFinalNodeMoniker
+                  Id="a794e2be-8960-4fa2-8a73-687ceb0e48f0"
+                  LastKnownName="ActivityFinal1"
+                  LastKnownLocation="Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <activityFinalNode
+            Id="a794e2be-8960-4fa2-8a73-687ceb0e48f0"
+            name="ActivityFinal1"
+            isLeaf="false" />
+        </nodes>
+      </activity>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <activity
+        Id="615b2f20-fd75-4842-a83e-749447be691e"
+        name="ActivityDiagramUC2"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false"
+        isReentrant="false"
+        isReadOnly="false"
+        isSingleExecution="false">
+        <nodes>
+          <initialNode
+            Id="85169074-2e56-4361-9081-596f6b779923"
+            name="Initial1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="e651e626-ec70-46de-8451-e048824b00a0"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="30af81ed-9408-484e-931d-ad0ff0918b64"
+                  LastKnownName="L'utilisateur se connecte"
+                  LastKnownLocation="Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction
+            Id="30af81ed-9408-484e-931d-ad0ff0918b64"
+            name="L'utilisateur se connecte"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="a3f0b755-8ddd-4abc-add7-a5187569c03a"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="91d7767c-0e89-49e2-a77b-6a8f0ae3bd2e"
+                  LastKnownName="Sélectionne un client sur la carte"
+                  LastKnownLocation="Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="91d7767c-0e89-49e2-a77b-6a8f0ae3bd2e"
+            name="Sélectionne un client sur la carte"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="060ac19c-e660-4e4e-bddb-ca2354bae745"
+                isLeaf="false">
+                <decisionNodeMoniker
+                  Id="c2038b4b-408e-4815-802b-e37b63ef3e1e"
+                  LastKnownName="Decision2"
+                  LastKnownLocation="Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="9ba85607-24e8-4dd4-943f-82c9da69fde0"
+            name="Refuse un client"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="b6a650d4-52c8-4c55-af05-6f2565dd3ca0"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="91d7767c-0e89-49e2-a77b-6a8f0ae3bd2e"
+                  LastKnownName="Sélectionne un client sur la carte"
+                  LastKnownLocation="Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode
+            Id="c2038b4b-408e-4815-802b-e37b63ef3e1e"
+            name="Decision2"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="b50f3c97-305c-407f-89e2-264b6f5a4b73"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="9ba85607-24e8-4dd4-943f-82c9da69fde0"
+                  LastKnownName="Refuse un client"
+                  LastKnownLocation="Modeling.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="20d473d6-c789-4f9c-b0ee-893b6d0e8bf5"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="ad5cd7b4-0c24-47b6-9d1b-8e164dac305b"
+                  LastKnownName="Accepte un client"
+                  LastKnownLocation="Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction
+            Id="ad5cd7b4-0c24-47b6-9d1b-8e164dac305b"
+            name="Accepte un client"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="db7024d3-fb83-403b-a807-41caa4043ba6"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="2a3e8eaf-64c5-456e-b89e-ea2f33e6a0f0"
+                  LastKnownName="Route optimale pour récupéré le client"
+                  LastKnownLocation="Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="2a3e8eaf-64c5-456e-b89e-ea2f33e6a0f0"
+            name="Route optimale pour récupéré le client"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="635f03e2-14c9-4df8-a5fc-095196d3673a"
+                guard="Client récupéré"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="c4dde169-824f-460e-a787-9d5483a1fc3b"
+                  LastKnownName="Route optimale pour arriver à destination"
+                  LastKnownLocation="Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="c4dde169-824f-460e-a787-9d5483a1fc3b"
+            name="Route optimale pour arriver à destination"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="b3463d7f-d7d9-4a26-8cdd-5f65cbaa87a3"
+                isLeaf="false">
+                <activityFinalNodeMoniker
+                  Id="34014d24-7ff1-4c86-9559-d62610a6d966"
+                  LastKnownName="ActivityFinal1"
+                  LastKnownLocation="Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <activityFinalNode
+            Id="34014d24-7ff1-4c86-9559-d62610a6d966"
+            name="ActivityFinal1"
+            isLeaf="false" />
+        </nodes>
+      </activity>
+    </packageHasNamedElement>
+  </packagedElements>
+  <primitiveType
+    Id="220a3521-e091-4221-bae9-3ef9018e845c"
+    name="Integer"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+    name="Boolean"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+    name="String"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="3ab42e7d-4969-445a-b209-471f5cb8209c"
+    name="UnlimitedNatural"
+    isAbstract="false"
+    isLeaf="false" />
+</modelStoreModel>

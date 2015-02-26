@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxiManager", "TaxiManager\TaxiManager.csproj", "{95F6F653-9626-4A6F-BCA3-E191EA13F325}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxiManagerTests", "TaxiManagerTests\TaxiManagerTests.csproj", "{A4543A17-DA89-4F3E-A7F9-14A6178F14F6}"
+EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "Modeling", "Modeling\Modeling.modelproj", "{A4415F50-D90A-4F39-9B9E-1708AC174B56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{A4543A17-DA89-4F3E-A7F9-14A6178F14F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4543A17-DA89-4F3E-A7F9-14A6178F14F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4543A17-DA89-4F3E-A7F9-14A6178F14F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4415F50-D90A-4F39-9B9E-1708AC174B56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4415F50-D90A-4F39-9B9E-1708AC174B56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4415F50-D90A-4F39-9B9E-1708AC174B56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4415F50-D90A-4F39-9B9E-1708AC174B56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
