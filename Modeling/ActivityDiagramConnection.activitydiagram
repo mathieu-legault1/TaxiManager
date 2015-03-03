@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm11="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner" dslVersion="1.0.0.0" Id="d46fe936-5361-4045-bbc6-c74c4b93b785" name="ActivityDiagramUC3" linkedPackageId="b77e98b8-dcfe-448f-b280-6671f3904e0e" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
+  <ownedCommentsInternal>
+    <comment Id="1681bd01-4f05-459e-a5da-0ab14eb074b0">
+      <elementDefinition Id="abaafa4d-0b7c-46a1-a3a1-64c25a254407" />
+      <body>Bon identifiant et bon mot de passe
+</body>
+    </comment>
+    <comment Id="f0f8dedf-47e7-427b-a947-ff0bf0a45d68">
+      <elementDefinition Id="a793a277-6391-4596-8210-e456a9ded419" />
+      <body>Connexion de l'utilisateur
+Acteur : Taxi ou Agence</body>
+    </comment>
+  </ownedCommentsInternal>
+  <profileInstances>
+    <packageHasProfileInstances Id="a43d6c95-0944-41b7-b9a0-893fc4594039">
+      <profileInstance Id="c815e680-8c9a-4672-9b0e-bb5712a353ec" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="663e616a-d7f4-4c92-974e-394f69b8e6ec">
+      <profileInstance Id="8d012428-e7eb-4da2-a747-aca7074f62d9" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <activityRootModelHasActivity>
+      <activity Id="cd7e463a-15b6-4694-a4f3-3c82375fdd1c" name="ActivityDiagramUC3" isAbstract="false" isLeaf="false" isActiveClass="false" isReentrant="false" isReadOnly="false" isSingleExecution="false">
+        <elementDefinition Id="3919b955-b493-4fa3-be71-3287735cb843" />
+        <nodes>
+          <initialNode Id="c9673aa4-7bfa-4f80-a6e2-5c9a65da20b5" name="Initial1" isLeaf="false">
+            <elementDefinition Id="9ad8e072-cdff-4811-8cb7-cc329c74903f" />
+            <flowNodeTargets>
+              <controlFlow Id="7eceae0a-6270-426f-a2fe-5c70780d75b5" isLeaf="false">
+                <opaqueActionMoniker Id="cfee12ed-4055-4ea3-add0-2cc3de547fbc" LastKnownName="L'utilisateur entre son identifiant et son mot de passe" />
+                <elementDefinition Id="453c9502-20cd-4e95-b5c3-42ff810dba1c" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction Id="cfee12ed-4055-4ea3-add0-2cc3de547fbc" name="L'utilisateur entre son identifiant et son mot de passe" isLeaf="false">
+            <elementDefinition Id="8ec7b2dc-3f37-4163-bf74-38544aa476e8" />
+            <flowNodeTargets>
+              <controlFlow Id="82b3438c-0330-4900-87e8-5465b0b9749c" isLeaf="false">
+                <decisionNodeMoniker Id="865f5c1e-3578-4023-b1da-bec75f791c02" LastKnownName="Decision1" />
+                <elementDefinition Id="57cc3c8a-0827-41ee-9d6a-698a26f65357" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="13771ce4-9285-4a66-9ae1-daa83322719c" name="L'utilisateur est connecté" isLeaf="false">
+            <elementDefinition Id="c7437f4a-ac54-4745-aed1-7eff8907a4bc" />
+            <flowNodeTargets>
+              <controlFlow Id="2c27b130-9618-484a-8a6b-5fc415633f5b" isLeaf="false">
+                <activityFinalNodeMoniker Id="a40f9a65-3f99-4961-8811-d25f3f76fd17" LastKnownName="ActivityFinal1" />
+                <elementDefinition Id="9d345be5-641e-49f7-ad32-8c7626900736" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="865f5c1e-3578-4023-b1da-bec75f791c02" name="Decision1" isLeaf="false">
+            <appliedStereotypesInternal>
+              <stereotypeInstance Id="31b0ddb0-b0b5-429e-924c-6ebe74a5994b" name="TextTemplateBindings" profile="TextTemplateBindings">
+                <elementDefinition Id="b26a604f-5de0-480f-b330-e132e8ee4c5a" />
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances Id="05b57cc4-e57e-427d-ab9f-50fd0b913229">
+                    <propertyInstance Id="42276adb-78e5-498c-b2d4-6df2317cbbd1" name="Alias" value="Template1">
+                      <elementDefinition Id="6af4f40c-3066-4ab6-9760-803f099cde68" />
+                    </propertyInstance>
+                    <elementDefinition Id="fbd92ec0-38bf-476b-b167-c2eb55a8c36e" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances Id="94b49148-58d4-445a-8ada-5f7f62a31d07">
+                    <propertyInstance Id="1d68fd95-58e7-4f90-8ffb-b824b706dd2c" name="TemplateFilePath">
+                      <elementDefinition Id="304dc9eb-9359-4ac3-be00-6629a090ea43" />
+                    </propertyInstance>
+                    <elementDefinition Id="f70234db-e569-4b29-8bd7-199497ce6c29" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances Id="12cad502-7d19-42a6-b2c7-37d491ffa2c4">
+                    <propertyInstance Id="205ada8b-c4ef-42d2-ba2c-df185abe4dfe" name="ProjectPath" value="Template1=..\ModelingLib\ModelingLib.csproj">
+                      <elementDefinition Id="ac641891-7671-4307-a0d6-4615f1907e15" />
+                    </propertyInstance>
+                    <elementDefinition Id="8b3dcc3b-da46-448c-9c24-b597d31f4c68" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances Id="d71dd335-45e0-4d08-83c0-6a0d2f0829f0">
+                    <propertyInstance Id="2ba393ae-f610-4094-a695-59fee672631d" name="TargetDirectory" value="Template1=GeneratedCode\{PackageStructure}">
+                      <elementDefinition Id="9ae9c108-a7b8-4dd1-8aa6-dc6d0860e923" />
+                    </propertyInstance>
+                    <elementDefinition Id="af827d53-f667-40df-82b4-6858123c4d0b" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances Id="271134d8-5636-4878-b889-ff48f6adfba3">
+                    <propertyInstance Id="ea9f4cc7-5e4d-45fa-afb0-3e989f7b654a" name="TargetName" value="Template1={Name}">
+                      <elementDefinition Id="501a889b-3df9-456c-ac5a-841b050f2f69" />
+                    </propertyInstance>
+                    <elementDefinition Id="6ae30151-621a-46f9-9791-ef6fd7bb440e" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances Id="5738fdda-31d4-4ff0-855a-6cadd4e32875">
+                    <propertyInstance Id="9cd326d3-3c79-44ac-80c9-69c8d89a56b0" name="Overwrite" value="Template1=True">
+                      <elementDefinition Id="f44fdd15-7cfb-48c7-9245-fdd9d60f8766" />
+                    </propertyInstance>
+                    <elementDefinition Id="caaf2f89-c769-4499-855c-3d997cfacb77" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances Id="434c19b3-29b0-4b1d-b0d4-325f9638ef0e">
+                    <propertyInstance Id="b73249d3-36c4-4af8-8bc3-1dc9c66bd603" name="Parameters">
+                      <elementDefinition Id="b65f809d-cfc4-4191-a251-5dbbea1920d2" />
+                    </propertyInstance>
+                    <elementDefinition Id="fad18258-aca6-4bae-9f9d-619f68e32287" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <elementDefinition Id="25c855bf-8e83-4f48-8f3e-3583f33cbf7e" />
+            <flowNodeTargets>
+              <controlFlow Id="03de2700-6f95-4eea-9916-a6ab7a91816f" guard="Non" isLeaf="false">
+                <opaqueActionMoniker Id="a42d18c2-d26f-4d08-9501-2e5046ca051b" LastKnownName="Identifiants invalides" />
+                <elementDefinition Id="994ca3bb-1605-4656-b8e8-045c2ecb9090" />
+              </controlFlow>
+              <controlFlow Id="892c0158-002b-49ab-b677-ebe3370872e3" guard="Oui" isLeaf="false">
+                <opaqueActionMoniker Id="13771ce4-9285-4a66-9ae1-daa83322719c" LastKnownName="L'utilisateur est connecté" />
+                <elementDefinition Id="efaf6b4a-5961-461a-8792-3d033872edab" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction Id="a42d18c2-d26f-4d08-9501-2e5046ca051b" name="Identifiants invalides" isLeaf="false">
+            <elementDefinition Id="56c24012-1606-4e68-96de-6a0434ca690f" />
+            <flowNodeTargets>
+              <controlFlow Id="f52dc6f8-94ac-4a79-9c6f-61fdcca3151b" isLeaf="false">
+                <opaqueActionMoniker Id="cfee12ed-4055-4ea3-add0-2cc3de547fbc" LastKnownName="L'utilisateur entre son identifiant et son mot de passe" />
+                <elementDefinition Id="1eb36024-cb55-4ced-86a2-720652dbb246" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <activityFinalNode Id="a40f9a65-3f99-4961-8811-d25f3f76fd17" name="ActivityFinal1" isLeaf="false">
+            <elementDefinition Id="efe923de-525c-4b9f-be4a-7adbd5ed8bea" />
+          </activityFinalNode>
+        </nodes>
+      </activity>
+    </activityRootModelHasActivity>
+  </packagedElements>
+  <package Id="b77e98b8-dcfe-448f-b280-6671f3904e0e" name="Modeling">
+    <elementDefinition Id="c736f8fc-a070-4a61-bad8-e6dc439523d7" />
+    <profileInstances>
+      <packageHasProfileInstances Id="f230d8d7-e745-4d7c-803a-eec4c3751a02">
+        <profileInstance Id="7be5b217-2d8a-4e90-83da-5af5a552d43b" name="TextTemplateBindings">
+          <elementDefinition Id="ed59f48a-d4df-4ab8-ab8e-b6216d9edc8c" />
+        </profileInstance>
+        <elementDefinition Id="127c1664-0ba1-442e-b24a-a815cbc79c45" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</activityRootModel>

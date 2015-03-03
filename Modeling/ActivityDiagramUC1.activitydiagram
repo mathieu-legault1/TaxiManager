@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="f0b7fd25-a1bc-4417-bc4d-076ad636a063" name="ActivityDiagramUC1" linkedPackageId="6049e22f-bdec-48bb-919f-ce94f845aebc" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
+<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm11="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner" dslVersion="1.0.0.0" Id="f0b7fd25-a1bc-4417-bc4d-076ad636a063" name="ActivityDiagramUC1" linkedPackageId="6049e22f-bdec-48bb-919f-ce94f845aebc" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
   <ownedCommentsInternal>
     <comment Id="358ef853-e6eb-4be3-a49b-9a3e4821dc91">
       <elementDefinition Id="5579fa74-a665-4f91-ad6b-20816477faa5" />
@@ -8,17 +8,11 @@ Acteur : Agence</body>
     </comment>
   </ownedCommentsInternal>
   <profileInstances>
-    <packageHasProfileInstances Id="34da9f1e-251e-437b-b6df-ee23e7ce3e33">
-      <profileInstance Id="e5392509-e731-4261-8f5b-d13b47ebdc00" name="StandardProfileL2">
-        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+    <packageHasProfileInstances Id="2588ae40-f2be-4477-9afd-545aee8f5cff">
+      <profileInstance Id="729c04d1-3e89-4aed-97d9-22e66be1a125" name="TextTemplateBindings">
+        <elementDefinition Id="ed59f48a-d4df-4ab8-ab8e-b6216d9edc8c" />
       </profileInstance>
-      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="bc479672-fbf5-48ee-b2e6-caf9f2e8106d">
-      <profileInstance Id="074a6715-67df-488c-978e-7ea395fb9eda" name="StandardProfileL3">
-        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
-      </profileInstance>
-      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      <elementDefinition Id="127c1664-0ba1-442e-b24a-a815cbc79c45" />
     </packageHasProfileInstances>
   </profileInstances>
   <packagedElements>
@@ -102,5 +96,19 @@ Acteur : Agence</body>
   </packagedElements>
   <package Id="6049e22f-bdec-48bb-919f-ce94f845aebc" name="Modeling">
     <elementDefinition Id="c736f8fc-a070-4a61-bad8-e6dc439523d7" />
+    <profileInstances>
+      <packageHasProfileInstances Id="34da9f1e-251e-437b-b6df-ee23e7ce3e33">
+        <profileInstance Id="e5392509-e731-4261-8f5b-d13b47ebdc00" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="bc479672-fbf5-48ee-b2e6-caf9f2e8106d">
+        <profileInstance Id="074a6715-67df-488c-978e-7ea395fb9eda" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
   </package>
 </activityRootModel>

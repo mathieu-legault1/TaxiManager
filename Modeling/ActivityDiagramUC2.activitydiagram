@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="a478df0a-3ab8-4bf2-aaf6-75f3c5d6e619" name="ActivityDiagramUC2" linkedPackageId="2bd86226-37fb-40af-ba0d-3b2549254244" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
+<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm11="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner" dslVersion="1.0.0.0" Id="a478df0a-3ab8-4bf2-aaf6-75f3c5d6e619" name="ActivityDiagramUC2" linkedPackageId="2bd86226-37fb-40af-ba0d-3b2549254244" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
   <ownedCommentsInternal>
     <comment Id="0ead7a59-1ad2-416e-9a31-08ac012956b9">
       <elementDefinition Id="217a5986-23e9-4131-8d76-a954cd1e46a1" />
@@ -7,6 +7,14 @@
 Acteur : Taxi</body>
     </comment>
   </ownedCommentsInternal>
+  <profileInstances>
+    <packageHasProfileInstances Id="661c2bea-3dd8-4b91-ac23-a7c5fe2d9db1">
+      <profileInstance Id="7ca142a9-769c-4d75-aace-c41166b9b901" name="TextTemplateBindings">
+        <elementDefinition Id="ed59f48a-d4df-4ab8-ab8e-b6216d9edc8c" />
+      </profileInstance>
+      <elementDefinition Id="127c1664-0ba1-442e-b24a-a815cbc79c45" />
+    </packageHasProfileInstances>
+  </profileInstances>
   <packagedElements>
     <activityRootModelHasActivity>
       <activity Id="596c1c9a-24b1-41a9-8ba4-1590682b1ad1" name="ActivityDiagramUC2" isAbstract="false" isLeaf="false" isActiveClass="false" isReentrant="false" isReadOnly="false" isSingleExecution="false">
