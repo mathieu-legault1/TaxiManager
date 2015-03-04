@@ -9,30 +9,27 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace TaxiManager.Controllers
 {
-    [Authorize(Roles = "Taxi")]
     public class HomeController : Controller
-    {
-        //protected UserManager<ApplicationUser> UserManager { get; set; }
-        //protected ApplicationDbContext Context { get; set; }
+    {        
 
         public HomeController()
         {
-            //this.Context = new ApplicationDbContext();
-            //this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.Context));
+            //
         }
 
         public ActionResult Index()
         { 
-            //var user = UserManager.FindByName(User.Identity.GetUserName());
-            //var cust = Context.Customers.FirstOrDefault();
+            using (var cont = new ApplicationDbContext())
+            {
+                cont.Customers.Add(new Customer() {
+                    Adress = "adsfsdfad",
+                    FirstName = "sdSDsdSS",
+                    LastName = "asadsfasdf",
+                    Status = Status.OnHold                   
+                });
 
-            //Context.Routes.Add(new Route()
-            //{
-            //    ApplicationUser = user,
-            //    Customer = cust
-            //});
-
-            //Context.SaveChanges();
+                cont.SaveChanges();
+            }
 
             return View();
         }

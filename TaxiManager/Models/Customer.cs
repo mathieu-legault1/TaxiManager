@@ -26,18 +26,18 @@ namespace TaxiManager.Models
         [Key]
         public int CustomerID { get; set; }
         
-        [Required]
+        //[Required]
         public Status Status { get; set; }
 
-        [Required]
+        //[Required]
         public string Adress { get; set; }
 
-        [Display(Name = "Prénom", Prompt = "...")]
-        [StringLength(25, MinimumLength = 3)]
+        //[Display(Name = "Prénom", Prompt = "...")]
+        //[StringLength(25, MinimumLength = 3)]
         public string FirstName { get; set; }
 
-        [Display(Name="Nom", Prompt="...")]
-        [StringLength(25, MinimumLength = 3)]
+        //[Display(Name="Nom", Prompt="...")]
+        //[StringLength(25, MinimumLength = 3)]
         public string LastName { get; set; }
         
         public string FullName

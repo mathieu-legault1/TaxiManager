@@ -21,24 +21,24 @@ namespace TaxiManager.Migrations
 			var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
 			context.Roles.AddOrUpdate(new IdentityRole[] {                
-				new IdentityRole("Agence"),
+				new IdentityRole("Agency"),
 				new IdentityRole("Taxi")
 			});
 
 			// Add default users            
-			if(UserManager.FindByName("Agence") == null)
+            if (UserManager.FindByName("Agency") == null)
 			{
-				var agence = new ApplicationUser() { UserName = "Agence" };
+                var agence = new ApplicationUser() { UserName = "Agency" };
 
-				UserManager.Create(agence, "agence123[");
-				UserManager.AddToRole(agence.Id, "Agence");
+                UserManager.Create(agence, "Agency123[");
+                UserManager.AddToRole(agence.Id, "Agency");
 			}
 
 			if (UserManager.FindByName("Taxi") == null)
 			{
 				var taxi = new ApplicationUser() { UserName = "Taxi" };
 
-				UserManager.Create(taxi, "taxi123[");
+				UserManager.Create(taxi, "Taxi123[");
 				UserManager.AddToRole(taxi.Id, "Taxi");
 			}     
 

@@ -47,9 +47,10 @@ namespace TaxiManager.Controllers
             {
                 var user = await UserManager.FindAsync(model.UserName, model.Password);
                 if (user != null)
-                {
+                {               
                     await SignInAsync(user, model.RememberMe);
-                    return RedirectToLocal(returnUrl);
+
+                    return UserManager.IsInRole(user.Id, "Taxi") ? RedirectToAction("Index", "Taxi") : RedirectToAction("Index", "Agency");
                 }
                 else
                 {
