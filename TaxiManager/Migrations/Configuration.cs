@@ -8,14 +8,15 @@ namespace TaxiManager.Migrations
 	using System.Linq;
 	using TaxiManager.Models;
 
-	internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<TaxiContext>
 	{
 		public Configuration()
 		{
 			AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
 		}
 
-		protected override void Seed(ApplicationDbContext context)
+        protected override void Seed(TaxiContext context)
 		{
             // Roles
             if (!context.Roles.Any(r => r.Name == "Taxi"))

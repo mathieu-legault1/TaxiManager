@@ -11,9 +11,9 @@ namespace TaxiManager.Models
         public string Adress { get; set; }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class TaxiContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext()
+        public TaxiContext()
             : base("DefaultConnection")
         {
         }

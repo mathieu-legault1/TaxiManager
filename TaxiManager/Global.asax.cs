@@ -15,7 +15,7 @@ namespace TaxiManager
     {
         protected void Application_Start()
         {
-            Database.SetInitializer<ApplicationDbContext>(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
+            Database.SetInitializer<TaxiContext>(new MigrateDatabaseToLatestVersion<TaxiContext, Configuration>());
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

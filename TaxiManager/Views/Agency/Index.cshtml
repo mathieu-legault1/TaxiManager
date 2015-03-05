@@ -1,3 +1,50 @@
-﻿<div class="jumbotron">
-    <h1>Agency.</h1>
+﻿@model TaxiManager.Models.Customer
+
+<div class="jumbotron">
+    <h1>Agence.</h1>
 </div>
+
+<div class="row">
+    <div style="height:500px;padding-left:15px;" id="map-canvas" class="col-sm-12 col-md-12 col-lg-9">
+    </div>
+
+    <div class="col-sm-12 col-md-12 col-lg-3">
+
+        @using (Html.BeginForm("NewCustomer", "Agency", FormMethod.Post, new { id = "customerForm" }))
+        {
+            <div class="form-group">
+                @Html.TextBoxFor(x => x.Adress, new { @class = "form-control", @placeholder = "Adresse ..." })
+                @Html.ValidationMessageFor(m => m.Adress)
+            </div>
+
+            <div class="form-group">
+                @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", @placeholder = "Prénom ..." })
+                @Html.ValidationMessageFor(m => m.FirstName)
+            </div>
+
+            <div class="form-group">
+                @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", @placeholder = "Nom ..." })
+                @Html.ValidationMessageFor(m => m.LastName)
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Nouveau client" class="btn btn-success" />
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">   
+        function initialize() {
+            var mapOptions = {
+                center: { lat: -34.397, lng: 150.644 },
+                zoom: 8
+            };
+            var map = new google.maps.Map(document.getElementById('map-canvas'),
+                mapOptions);
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+}

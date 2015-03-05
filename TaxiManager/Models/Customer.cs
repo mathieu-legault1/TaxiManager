@@ -29,15 +29,16 @@ namespace TaxiManager.Models
         //[Required]
         public Status Status { get; set; }
 
-        //[Required]
+        [Required(ErrorMessage="L'adresse est obligatoire")]
+        [Display(Name="Adresse")]
         public string Adress { get; set; }
 
-        //[Display(Name = "Prénom", Prompt = "...")]
-        //[StringLength(25, MinimumLength = 3)]
+        [Display(Name = "Prénom")]
+        [StringLength(25, MinimumLength = 3, ErrorMessage="Le prénom ne doit pas dépasser 25 caractères et doit avoir au minimum 3 caractères ")]
         public string FirstName { get; set; }
 
-        //[Display(Name="Nom", Prompt="...")]
-        //[StringLength(25, MinimumLength = 3)]
+        [Display(Name="Nom")]
+        [StringLength(25, MinimumLength = 3, ErrorMessage="Le nom ne doit pas dépasser 25 caractères et doit avoir au minimum 3 caractères ")]
         public string LastName { get; set; }
         
         public string FullName
@@ -47,5 +48,11 @@ namespace TaxiManager.Models
                 return LastName + ", " + FirstName;
             }
         }
+    }
+
+    public class CustomerViewModel
+    {
+        public Customer Customer { get; set; }
+        public IEnumerable<Customer> Customers { get; set; }
     }
 }
