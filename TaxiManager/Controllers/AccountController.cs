@@ -58,7 +58,6 @@ namespace TaxiManager.Controllers
                 }
             }
 
-            // Si nous sommes arrivés là, un échec s’est produit. Réafficher le formulaire
             return View(model);
         }
 

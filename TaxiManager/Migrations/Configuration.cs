@@ -16,53 +16,31 @@ namespace TaxiManager.Migrations
 		}
 
 		protected override void Seed(ApplicationDbContext context)
-		{         
-			var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-			var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+		{
+            // Roles
+            if (!context.Roles.Any(r => r.Name == "Taxi"))
+            {
+                var store = new RoleStore<IdentityRole>(context);
+                var manager = new RoleManager<IdentityRole>(store);
 
-			context.Roles.AddOrUpdate(new IdentityRole[] {                
-				new IdentityRole("Agency"),
-				new IdentityRole("Taxi")
-			});
+                manager.Create(new IdentityRole { Name = "Taxi" });
+                manager.Create(new IdentityRole { Name = "Agency" });
+            }
 
-			// Add default users            
-            if (UserManager.FindByName("Agency") == null)
-			{
-                var agence = new ApplicationUser() { UserName = "Agency" };
+            // Users
+            if (!context.Users.Any(u => u.UserName == "Taxi"))
+            {
+                var store = new UserStore<ApplicationUser>(context);
+                var manager = new UserManager<ApplicationUser>(store);
+                var taxiUser = new ApplicationUser { UserName = "Taxi" };
+                var agencyUser = new ApplicationUser { UserName = "Agency" };
 
-                UserManager.Create(agence, "Agency123[");
-                UserManager.AddToRole(agence.Id, "Agency");
-			}
+                manager.Create(taxiUser, "Taxi123[");
+                manager.AddToRole(taxiUser.Id, "Taxi");
 
-			if (UserManager.FindByName("Taxi") == null)
-			{
-				var taxi = new ApplicationUser() { UserName = "Taxi" };
-
-				UserManager.Create(taxi, "Taxi123[");
-				UserManager.AddToRole(taxi.Id, "Taxi");
-			}     
-
-			// Add default clients
-			context.Customers.AddOrUpdate(new Customer[] {
-				new Customer() {
-					FirstName = "John",
-					LastName = "Doe",
-					Status = Status.Denied,
-				},
-				new Customer() {
-					FirstName = "Jane",
-					LastName = "Doe",
-					Status = Status.Accepted,
-				},
-				new Customer() {
-					FirstName = "Mat",
-					LastName = "Doe",
-					Adress = "",
-					Status = Status.OnHold
-				}            
-			});
-			
-			base.Seed(context);
+                manager.Create(agencyUser, "Agency123[");
+                manager.AddToRole(agencyUser.Id, "Agency");
+            }
 		}
 	}
 }
