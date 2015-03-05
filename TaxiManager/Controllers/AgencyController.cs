@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,7 +16,9 @@ namespace TaxiManager.Controllers
 
         // GET: Agency
         public ActionResult Index()
-        {            
+        {
+            ViewBag.Customers = JsonConvert.SerializeObject(db.Customers.ToList<Customer>());
+
             return View();
         }
 

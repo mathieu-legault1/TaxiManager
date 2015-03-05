@@ -5,7 +5,10 @@
 </div>
 
 <div class="row">
-    <div style="height:500px;padding-left:15px;" id="map-canvas" class="col-sm-12 col-md-12 col-lg-9">
+    <div style="height:500px;padding-left:15px;" id="map_canvas" class="col-sm-12 col-md-12 col-lg-9">
+
+
+
     </div>
 
     <div class="col-sm-12 col-md-12 col-lg-3">
@@ -35,16 +38,34 @@
 </div>
 
 @section scripts
-{
+{    
     <script type="text/javascript">   
-        function initialize() {
-            var mapOptions = {
-                center: { lat: -34.397, lng: 150.644 },
-                zoom: 8
+        $(document).ready(function () {
+            var map;
+            var elevator;
+            var myOptions = {
+                zoom: 1,
+                center: new google.maps.LatLng(0, 0),
+                mapTypeId: 'terrain'
             };
-            var map = new google.maps.Map(document.getElementById('map-canvas'),
-                mapOptions);
-        }
-        google.maps.event.addDomListener(window, 'load', initialize);
+            map = new google.maps.Map($('#map_canvas')[0], myOptions);
+
+            var customers = JSON.parse('@Html.Raw(ViewBag.Customers)')
+                
+
+            for (var x = 0; x < customers.length; x++) {
+                $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + customers[x].Adress + '&sensor=false', null, function (data) {
+                    var p = data.results[0].geometry.location
+                    var latlng = new google.maps.LatLng(p.lat, p.lng);
+                    new google.maps.Marker({
+                        position: latlng,
+                        map: map
+                    });
+
+                });
+            }
+        });
+
+
     </script>
 }
