@@ -6,9 +6,6 @@
 
 <div class="row">
     <div style="height:500px;padding-left:15px;" id="map_canvas" class="col-sm-12 col-md-12 col-lg-9">
-
-
-
     </div>
 
     <div class="col-sm-12 col-md-12 col-lg-3">
@@ -16,7 +13,7 @@
         @using (Html.BeginForm("NewCustomer", "Agency", FormMethod.Post, new { id = "customerForm" }))
         {
             <div class="form-group">
-                @Html.TextBoxFor(x => x.Adress, new { @class = "form-control", @placeholder = "Adresse ..." })
+                @Html.TextBoxFor(x => x.Adress, new { @class = "form-control", @id = "btnAdress", @placeholder = "Adresse ..." })
                 @Html.ValidationMessageFor(m => m.Adress)
             </div>
 
@@ -39,33 +36,148 @@
 
 @section scripts
 {    
-    <script type="text/javascript">   
-        $(document).ready(function () {
-            var map;
-            var elevator;
-            var myOptions = {
-                zoom: 1,
-                center: new google.maps.LatLng(0, 0),
-                mapTypeId: 'terrain'
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+        var map;
+        var elevator;
+        var myOptions = { zoom: 15 };
+
+        map = new google.maps.Map($('#map_canvas')[0], myOptions);
+
+        var addressControlDiv = document.createElement('div');
+        var addressControl = new AddAddressControl(addressControlDiv, map);
+
+        addressControlDiv.index = 1;
+        map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(addressControlDiv);
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var pos = new google.maps.LatLng(position.coords.latitude,
+                                                 position.coords.longitude);
+
+                var infowindow = new google.maps.InfoWindow({
+                    map: map,
+                    position: pos,
+                    content: 'Position actuel'
+                });
+
+                map.setCenter(pos);
+            }, function () {
+                handleNoGeolocation(true);
+            });
+        } else {
+            // Browser doesn't support Geolocation
+            handleNoGeolocation(false);
+        }
+
+        function handleNoGeolocation(errorFlag) {
+            if (errorFlag) {
+                var content = 'Error: The Geolocation service failed.';
+            } else {
+                var content = 'Error: Your browser doesn\'t support geolocation.';
+            }
+
+            var options = {
+                map: map,
+                position: new google.maps.LatLng(60, 105),
+                content: content
             };
-            map = new google.maps.Map($('#map_canvas')[0], myOptions);
 
-            var customers = JSON.parse('@Html.Raw(ViewBag.Customers)')
-                
+            var infowindow = new google.maps.InfoWindow(options);
+            map.setCenter(options.position);
+        }
 
-            for (var x = 0; x < customers.length; x++) {
+        // Insert markers
+        var customers = JSON.parse('@Html.Raw(Session["Customers"])')
+
+            for (var x = 1; x < customers.length; x++) {
                 $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + customers[x].Adress + '&sensor=false', null, function (data) {
+
                     var p = data.results[0].geometry.location
                     var latlng = new google.maps.LatLng(p.lat, p.lng);
-                    new google.maps.Marker({
-                        position: latlng,
-                        map: map
+                    var marker = new google.maps.Marker({ map: map, position: latlng, clickable: true });
+
+                    marker.info = new google.maps.InfoWindow({
+                        content: customers2[x].Adress
                     });
 
+                    google.maps.event.addListener(marker, 'click', function () {
+                        marker.info.open(map, marker);
+                    });
                 });
             }
         });
 
+        function geocodePosition(pos) {
+            geocoder = new google.maps.Geocoder();
+            geocoder.geocode
+             ({
+                 latLng: pos
+             },
+                 function (results, status) {
+                     if (status == google.maps.GeocoderStatus.OK) {
+                         $("#btnAdress").val(results[0].formatted_address);
+                         //$("#mapErrorMsg").hide(100);
+                     }
+                     else {
+                         //$("#mapErrorMsg").html('Cannot determine address at this location.' + status).show(100);
+                     }
+                 }
+             );
+        }
+
+        /** constructor */
+        function AddAddressControl(controlDiv, map, center) {
+
+            // We set up a variable for this since we're adding event listeners later.
+            var control = this;
+
+            // Set the center property upon construction
+            control.center_ = center;
+            controlDiv.style.clear = 'both';
+
+            // Set CSS for the control border
+            var goCenterUI = document.createElement('div');
+            goCenterUI.style.backgroundColor = '#fff';
+            goCenterUI.style.border = '2px solid #fff';
+            goCenterUI.style.borderRadius = '3px';
+            goCenterUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+            goCenterUI.style.cursor = 'pointer';
+            goCenterUI.style.float = 'left';
+            goCenterUI.style.marginBottom = '22px';
+            goCenterUI.style.textAlign = 'center';
+            goCenterUI.title = 'Cliquer pour ajouter manuellement une adresse';
+            controlDiv.appendChild(goCenterUI);
+
+            // Set CSS for the control interior
+            var goCenterText = document.createElement('div');
+            goCenterUI.style.color = 'rgb(25,25,25)';
+            goCenterUI.style.fontFamily = 'Roboto,Arial,sans-serif';
+            goCenterUI.style.fontSize = '16px';
+            goCenterUI.style.lineHeight = '38px';
+            goCenterUI.style.paddingLeft = '5px';
+            goCenterUI.style.paddingRight = '5px';
+            goCenterUI.innerHTML = 'Ajouter une adresse';
+            goCenterUI.appendChild(goCenterText);
+
+            // Setup the click event listener for 'Center':
+            // simply set the map to the control's current center property.
+            google.maps.event.addDomListener(goCenterUI, 'click', function () {
+                marker = new google.maps.Marker(
+                {
+                    map: map,
+                    draggable: true,
+                    animation: google.maps.Animation.DROP,
+                    position: map.getCenter()
+                });
+                google.maps.event.addListener(marker, 'dragend', function () {
+                    geocodePosition(marker.getPosition());
+                });
+
+                map.controls[google.maps.ControlPosition.BOTTOM_LEFT].removeAt(0)
+            });
+        }
 
     </script>
 }

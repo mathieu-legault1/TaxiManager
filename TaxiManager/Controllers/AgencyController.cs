@@ -17,21 +17,24 @@ namespace TaxiManager.Controllers
         // GET: Agency
         public ActionResult Index()
         {
-            ViewBag.Customers = JsonConvert.SerializeObject(db.Customers.ToList<Customer>());
+            // Add customers to session 
+            Session["Customers"] = JsonConvert.SerializeObject(db.Customers.ToList<Customer>());
 
             return View();
         }
 
         [HttpPost]
         public ActionResult NewCustomer([Bind(Include = "CustomerID, Adress, FirstName, LastName")] Customer model)
-        {
+        {            
             if (ModelState.IsValid)
             {
                 db.Customers.Add(model);
                 db.SaveChanges();
+
+                return RedirectToAction("Index");
             }
 
-            return Redirect("Index");
+            return View("Index");
         }
 
         protected override void Dispose(bool disposing)

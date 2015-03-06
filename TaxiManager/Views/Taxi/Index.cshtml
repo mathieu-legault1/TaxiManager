@@ -1,3 +1,107 @@
-﻿<div class="jumbotron">
-    <h1>Taxi.</h1>
+﻿@model TaxiManager.Models.Customer
+
+<div class="jumbotron">
+    <h1>Agence.</h1>
 </div>
+
+<div class="row">
+    <div style="height:500px;padding-left:15px;" id="map_canvas" class="col-sm-12 col-md-12 col-lg-9">
+    </div>
+
+    <div class="col-sm-12 col-md-12 col-lg-3">
+
+        @using (Html.BeginForm("NewCustomer", "Agency", FormMethod.Post, new { id = "customerForm" }))
+        {
+            <div class="form-group">
+                @Html.TextBoxFor(x => x.Adress, new { @class = "form-control", @id = "btnAdress", @placeholder = "Adresse ..." })
+                @Html.ValidationMessageFor(m => m.Adress)
+            </div>
+
+            <div class="form-group">
+                @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", @placeholder = "Prénom ..." })
+                @Html.ValidationMessageFor(m => m.FirstName)
+            </div>
+
+            <div class="form-group">
+                @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", @placeholder = "Nom ..." })
+                @Html.ValidationMessageFor(m => m.LastName)
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Nouveau client" class="btn btn-success" />
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+        var map;
+        var elevator;
+        var myOptions = { zoom: 15 };
+
+        map = new google.maps.Map($('#map_canvas')[0], myOptions);
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var pos = new google.maps.LatLng(position.coords.latitude,
+                                                 position.coords.longitude);
+
+                var infowindow = new google.maps.InfoWindow({
+                    map: map,
+                    position: pos,
+                    content: 'Position actuel'
+                });
+
+                map.setCenter(pos);
+            }, function () {
+                handleNoGeolocation(true);
+            });
+        } else {
+            // Browser doesn't support Geolocation
+            handleNoGeolocation(false);
+        }
+
+        function handleNoGeolocation(errorFlag) {
+            if (errorFlag) {
+                var content = 'Error: The Geolocation service failed.';
+            } else {
+                var content = 'Error: Your browser doesn\'t support geolocation.';
+            }
+
+            var options = {
+                map: map,
+                position: new google.maps.LatLng(60, 105),
+                content: content
+            };
+
+            var infowindow = new google.maps.InfoWindow(options);
+            map.setCenter(options.position);
+        }
+
+        // Insert markers
+        var customers = JSON.parse('@Html.Raw(Session["Customers"])')
+
+            for (var x = 1; x < customers.length; x++) {
+                $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + customers[x].Adress + '&sensor=false', null, function (data) {
+
+                    var p = data.results[0].geometry.location
+                    var latlng = new google.maps.LatLng(p.lat, p.lng);
+                    var marker = new google.maps.Marker({ map: map, position: latlng, clickable: true });
+
+                    marker.info = new google.maps.InfoWindow({
+                        content: customers2[x].Adress
+                    });
+
+                    google.maps.event.addListener(marker, 'click', function () {
+                        marker.info.open(map, marker);
+                    });
+                });
+            }
+        });
+
+    </script>
+}
