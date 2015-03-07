@@ -27,6 +27,9 @@
                 @Html.ValidationMessageFor(m => m.LastName)
             </div>
 
+            <label>temps estimé</label>
+            <label id="lblTime"></label>
+
             <div class="form-group">
                 <input type="submit" value="Nouveau client" class="btn btn-success" />
             </div>
@@ -35,78 +38,105 @@
 </div>
 
 @section scripts
-{    
+{
     <script type="text/javascript">
 
-    $(document).ready(function () {
-        var map;
-        var elevator;
-        var myOptions = { zoom: 15 };
+        $(document).ready(function () {
+            var map;
+            var elevator;
+            var myOptions = { zoom: 15 };
 
-        map = new google.maps.Map($('#map_canvas')[0], myOptions);
+            map = new google.maps.Map($('#map_canvas')[0], myOptions);
 
-        var addressControlDiv = document.createElement('div');
-        var addressControl = new AddAddressControl(addressControlDiv, map);
+            var addressControlDiv = document.createElement('div');
+            var addressControl = new AddAddressControl(addressControlDiv, map);
 
-        addressControlDiv.index = 1;
-        map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(addressControlDiv);
+            addressControlDiv.index = 1;
+            map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(addressControlDiv);
 
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-                var pos = new google.maps.LatLng(position.coords.latitude,
-                                                 position.coords.longitude);
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    
+                    var pos = new google.maps.LatLng(position.coords.latitude,
+                                                     position.coords.longitude);
 
-                var infowindow = new google.maps.InfoWindow({
-                    map: map,
-                    position: pos,
-                    content: 'Position actuel'
+                    var infowindow = new google.maps.InfoWindow({
+                        map: map,
+                        position: pos,
+                        content: 'Vous êtes ici'
+                    });
+
+                    map.setCenter(pos);
+                }, function () {
+                    handleNoGeolocation(true);
                 });
-
-                map.setCenter(pos);
-            }, function () {
-                handleNoGeolocation(true);
-            });
-        } else {
-            // Browser doesn't support Geolocation
-            handleNoGeolocation(false);
-        }
-
-        function handleNoGeolocation(errorFlag) {
-            if (errorFlag) {
-                var content = 'Error: The Geolocation service failed.';
             } else {
-                var content = 'Error: Your browser doesn\'t support geolocation.';
+                // Browser doesn't support Geolocation
+                handleNoGeolocation(false);
             }
 
-            var options = {
-                map: map,
-                position: new google.maps.LatLng(60, 105),
-                content: content
-            };
+            function handleNoGeolocation(errorFlag) {
+                if (errorFlag) {
+                    var content = 'Error: The Geolocation service failed.';
+                } else {
+                    var content = 'Error: Your browser doesn\'t support geolocation.';
+                }
 
-            var infowindow = new google.maps.InfoWindow(options);
-            map.setCenter(options.position);
-        }
+                // Set default location to Montreal
+                var options = {
+                    map: map,
+                    position: new google.maps.LatLng(45.501689, -73.567256),
+                    content: content
+                };
 
-        // Insert markers
-        var customers = JSON.parse('@Html.Raw(Session["Customers"])')
+                var infowindow = new google.maps.InfoWindow(options);
+                map.setCenter(options.position);
+            }
 
-            for (var x = 1; x < customers.length; x++) {
-                $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + customers[x].Adress + '&sensor=false', null, function (data) {
+            var infowindow = new google.maps.InfoWindow({
+                maxWidth: 160
+            });
 
-                    var p = data.results[0].geometry.location
-                    var latlng = new google.maps.LatLng(p.lat, p.lng);
-                    var marker = new google.maps.Marker({ map: map, position: latlng, clickable: true });
+            // --------------
+            // load customers 
+            // --------------
+            var customers = JSON.parse('@Html.Raw(Session["Customers"])')
+            var markers = new Array();
 
-                    marker.info = new google.maps.InfoWindow({
-                        content: customers2[x].Adress
-                    });
+            for (var i = 0; i < customers.length; i++) {
 
-                    google.maps.event.addListener(marker, 'click', function () {
-                        marker.info.open(map, marker);
-                    });
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(customers[i].Latitude, customers[i].Longitude),
+                    map: map
                 });
+
+                markers.push(marker);
+
+                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                    return function () {
+
+                        var content = "";
+                        if (customers[i].FirstName != null && customers[i].LastName != null)
+                        {
+                            content = "<b>" + customers[i].FirstName + " "
+                                + customers[i].LastName
+                                + "</b><br>"
+                                + customers[i].Adress;
+                        } else {
+                            content = customers[i].Adress;
+                        }
+
+                        infowindow.setContent(content);
+                        infowindow.open(map, marker);
+                    }
+                })(marker, i));
             }
+
+            // ----------
+            // load taxis
+            // ----------
+            
+
         });
 
         function geocodePosition(pos) {
@@ -118,16 +148,30 @@
                  function (results, status) {
                      if (status == google.maps.GeocoderStatus.OK) {
                          $("#btnAdress").val(results[0].formatted_address);
-                         //$("#mapErrorMsg").hide(100);
-                     }
-                     else {
-                         //$("#mapErrorMsg").html('Cannot determine address at this location.' + status).show(100);
+
+                         var service = new google.maps.DistanceMatrixService();
+                         service.getDistanceMatrix({
+                             origins: "204 boulevard longpré, laval, QC H7L 3C9, Canada".split(',', 1000),
+                             destinations: results[0].formatted_address.split(',', 1000),
+                             travelMode: google.maps.TravelMode.DRIVING,
+                             unitSystem: google.maps.UnitSystem.METRIC,
+                             avoidHighways: false,
+                             avoidTolls: false
+                         }, function (response, status) {
+                             if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
+                                 var distance = response.rows[0].elements[0].distance.text;
+                                 var duration = response.rows[0].elements[0].duration.text;
+
+                                 $('#lblTime').text(duration);
+                             } else {
+                                 alert("Unable to find the distance via road.");
+                             }
+                         });
                      }
                  }
              );
         }
-
-        /** constructor */
+        
         function AddAddressControl(controlDiv, map, center) {
 
             // We set up a variable for this since we're adding event listeners later.
@@ -161,8 +205,7 @@
             goCenterUI.innerHTML = 'Ajouter une adresse';
             goCenterUI.appendChild(goCenterText);
 
-            // Setup the click event listener for 'Center':
-            // simply set the map to the control's current center property.
+            // Setup the click event listener
             google.maps.event.addDomListener(goCenterUI, 'click', function () {
                 marker = new google.maps.Marker(
                 {

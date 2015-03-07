@@ -40,6 +40,9 @@ namespace TaxiManager.Models
         [Display(Name="Nom")]
         [StringLength(25, MinimumLength = 3, ErrorMessage="Le nom ne doit pas dépasser 25 caractères et doit avoir au minimum 3 caractères ")]
         public string LastName { get; set; }
+
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
         
         public string FullName
         {
