@@ -12,16 +12,16 @@
 
         @using (Html.BeginForm("CustomerAction", "Taxi", FormMethod.Post))
         {
-            @Html.HiddenFor(c => c.CustomerID, new { id = "customerID" })
-            @Html.LabelFor(c => c.Adress, new { id = "lblAddress" })
+            @Html.HiddenFor(c => c.CustomerID, new { id = "customerID" })            
+
+            @Html.Label("Prénom :") <label id="lblFirstName"></label><br />
+            @Html.Label("Nom :") <label id="lblLastName"></label><br />
+            @Html.Label("Adresse :") <label id="lblAddress"></label><br />
             
-            @*@Html.Label("Prénom : ")<br /> <label id="lblFistName"></label><br />
-            @Html.Label("Nom : ")<br /> <label id="lblLastName"></label><br />
-            @Html.Label("Adresse : ")<br /> <label name="address" id="lblAddress"></label><br />*@
 
             <div class="form-group">
-                <input type="submit" name="submitAction" value="Accepter" id="accept" class="btn btn-success" />
-                <input type="submit" name="submitAction" value="Refuser" id="denied" class="btn btn-danger" />
+                <input type="submit" disabled="disabled" name="submitAction" value="Accepter" id="accept" class="btn btn-success" />
+                <input type="submit" disabled="disabled" name="submitAction" value="Refuser" id="denied" class="btn btn-danger" />
             </div>
         }
 
@@ -96,6 +96,12 @@
 
                     google.maps.event.addListener(marker, 'click', (function (marker, i) {
                         return function () {
+                                                        
+                            if ($('#accept').is(":disabled")) {
+                                $('input[type="submit"]').removeAttr('disabled');
+                            }
+
+                            // Populate customer's details
                             $('#customerID').val(customers[i].CustomerID);
                             $('#lblFirstName').text(customers[i].FirstName);
                             $('#lblLastName').text(customers[i].LastName);
