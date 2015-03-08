@@ -9,25 +9,48 @@ using TaxiManager.Models;
 namespace TaxiManager.Controllers
 {
     [Authorize(Roles="Taxi")]
-    public class TaxiController : Controller
-    {
-        private TaxiContext db = new TaxiContext();
-
+    public class TaxiController : BaseController
+    {        
         // GET: Taxi
         public ActionResult Index()
         {
-            Session["Customers"] = JsonConvert.SerializeObject(db.Customers.ToList<Customer>());
+            SetCustomersInSession();
 
             return View();
         }
 
-        protected override void Dispose(bool disposing)
+        public ActionResult CustomerAction(int customerID, string submitAction)
         {
-            if (disposing)
+            switch (submitAction)
             {
-                db.Dispose();
+                case "Accepter":
+
+                    return (NewRoute(customerID));
+                case "Refuser":
+
+                    return (Delete(customerID));
             }
-            base.Dispose(disposing);
+
+            return View("Index");
+        }
+
+        public ActionResult NewRoute(int id)
+        {
+
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Delete(int id)
+        {
+            Customer customer = db.Customers.Find(id);
+            if(customer != null)
+            {
+                db.Customers.Remove(customer);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

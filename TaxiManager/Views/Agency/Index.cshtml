@@ -13,7 +13,7 @@
         @using (Html.BeginForm("NewCustomer", "Agency", FormMethod.Post, new { id = "customerForm" }))
         {
             <div class="form-group">
-                @Html.TextBoxFor(x => x.Adress, new { @class = "form-control", @id = "btnAdress", @placeholder = "Adresse ..." })
+                @Html.TextBoxFor(x => x.Adress, new { @class = "form-control", @id = "txtAddress", @placeholder = "Adresse ..." })
                 @Html.ValidationMessageFor(m => m.Adress)
             </div>
 
@@ -44,6 +44,7 @@
         $(document).ready(function () {
             var map;
             var elevator;
+            var customers = JSON.parse('@Html.Raw(Session["Customers"])');
             var myOptions = { zoom: 15 };
 
             map = new google.maps.Map($('#map_canvas')[0], myOptions);
@@ -56,7 +57,7 @@
 
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
-                    
+
                     var pos = new google.maps.LatLng(position.coords.latitude,
                                                      position.coords.longitude);
 
@@ -98,9 +99,8 @@
             });
 
             // --------------
-            // load customers 
+            // load customers
             // --------------
-            var customers = JSON.parse('@Html.Raw(Session["Customers"])')
             var markers = new Array();
 
             for (var i = 0; i < customers.length; i++) {
@@ -116,8 +116,7 @@
                     return function () {
 
                         var content = "";
-                        if (customers[i].FirstName != null && customers[i].LastName != null)
-                        {
+                        if (customers[i].FirstName != null && customers[i].LastName != null) {
                             content = "<b>" + customers[i].FirstName + " "
                                 + customers[i].LastName
                                 + "</b><br>"
@@ -135,7 +134,6 @@
             // ----------
             // load taxis
             // ----------
-            
 
         });
 
@@ -147,7 +145,7 @@
              },
                  function (results, status) {
                      if (status == google.maps.GeocoderStatus.OK) {
-                         $("#btnAdress").val(results[0].formatted_address);
+                         $("#txtAddress").val(results[0].formatted_address);
 
                          var service = new google.maps.DistanceMatrixService();
                          service.getDistanceMatrix({
@@ -171,7 +169,7 @@
                  }
              );
         }
-        
+
         function AddAddressControl(controlDiv, map, center) {
 
             // We set up a variable for this since we're adding event listeners later.
@@ -222,5 +220,5 @@
             });
         }
 
-    </script>
+</script>
 }

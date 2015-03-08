@@ -8,100 +8,103 @@
     <div style="height:500px;padding-left:15px;" id="map_canvas" class="col-sm-12 col-md-12 col-lg-9">
     </div>
 
-    <div class="col-sm-12 col-md-12 col-lg-3">
+    <div id="" class="col-sm-12 col-md-12 col-lg-3">
 
-        @using (Html.BeginForm("NewCustomer", "Agency", FormMethod.Post, new { id = "customerForm" }))
+        @using (Html.BeginForm("CustomerAction", "Taxi", FormMethod.Post))
         {
-            <div class="form-group">
-                @Html.TextBoxFor(x => x.Adress, new { @class = "form-control", @id = "btnAdress", @placeholder = "Adresse ..." })
-                @Html.ValidationMessageFor(m => m.Adress)
-            </div>
+            @Html.HiddenFor(c => c.CustomerID, new { id = "customerID" })
+            @Html.LabelFor(c => c.Adress, new { id = "lblAddress" })
+            
+            @*@Html.Label("Prénom : ")<br /> <label id="lblFistName"></label><br />
+            @Html.Label("Nom : ")<br /> <label id="lblLastName"></label><br />
+            @Html.Label("Adresse : ")<br /> <label name="address" id="lblAddress"></label><br />*@
 
             <div class="form-group">
-                @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", @placeholder = "Prénom ..." })
-                @Html.ValidationMessageFor(m => m.FirstName)
-            </div>
-
-            <div class="form-group">
-                @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", @placeholder = "Nom ..." })
-                @Html.ValidationMessageFor(m => m.LastName)
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Nouveau client" class="btn btn-success" />
+                <input type="submit" name="submitAction" value="Accepter" id="accept" class="btn btn-success" />
+                <input type="submit" name="submitAction" value="Refuser" id="denied" class="btn btn-danger" />
             </div>
         }
-    </div>
+
+     </div>
 </div>
 
-@section scripts
+    @section scripts
 {
-    <script type="text/javascript">
+        <script type="text/javascript">
 
-    $(document).ready(function () {
-        var map;
-        var elevator;
-        var myOptions = { zoom: 15 };
+            $(document).ready(function () {
+                var map;
+                var elevator;
+                var customers = JSON.parse('@Html.Raw(Session["Customers"])');
+                var myOptions = { zoom: 15 };
 
-        map = new google.maps.Map($('#map_canvas')[0], myOptions);
+                map = new google.maps.Map($('#map_canvas')[0], myOptions);
 
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-                var pos = new google.maps.LatLng(position.coords.latitude,
-                                                 position.coords.longitude);
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
 
-                var infowindow = new google.maps.InfoWindow({
-                    map: map,
-                    position: pos,
-                    content: 'Position actuel'
-                });
+                        var pos = new google.maps.LatLng(position.coords.latitude,
+                                                         position.coords.longitude);
 
-                map.setCenter(pos);
-            }, function () {
-                handleNoGeolocation(true);
+                        var infowindow = new google.maps.InfoWindow({
+                            map: map,
+                            position: pos,
+                            content: 'Vous êtes ici'
+                        });
+
+                        map.setCenter(pos);
+                    }, function () {
+                        handleNoGeolocation(true);
+                    });
+                } else {
+                    // Browser doesn't support Geolocation
+                    handleNoGeolocation(false);
+                }
+
+                function handleNoGeolocation(errorFlag) {
+                    if (errorFlag) {
+                        var content = 'Error: The Geolocation service failed.';
+                    } else {
+                        var content = 'Error: Your browser doesn\'t support geolocation.';
+                    }
+
+                    // Set default location to Montreal
+                    var options = {
+                        map: map,
+                        position: new google.maps.LatLng(45.501689, -73.567256),
+                        content: content
+                    };
+
+                    var infowindow = new google.maps.InfoWindow(options);
+                    map.setCenter(options.position);
+                }
+
+
+                // --------------
+                // load customers
+                // --------------
+                var markers = new Array();
+
+                for (var i = 0; i < customers.length; i++) {
+
+                    var marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(customers[i].Latitude, customers[i].Longitude),
+                        map: map
+                    });
+
+                    markers.push(marker);
+
+                    google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                        return function () {
+                            $('#customerID').val(customers[i].CustomerID);
+                            $('#lblFirstName').text(customers[i].FirstName);
+                            $('#lblLastName').text(customers[i].LastName);
+                            $('#lblAddress').text(customers[i].Adress);
+                        }
+                    })(marker, i));
+                }
+
             });
-        } else {
-            // Browser doesn't support Geolocation
-            handleNoGeolocation(false);
-        }
 
-        function handleNoGeolocation(errorFlag) {
-            if (errorFlag) {
-                var content = 'Error: The Geolocation service failed.';
-            } else {
-                var content = 'Error: Your browser doesn\'t support geolocation.';
-            }
-
-            var options = {
-                map: map,
-                position: new google.maps.LatLng(60, 105),
-                content: content
-            };
-
-            var infowindow = new google.maps.InfoWindow(options);
-            map.setCenter(options.position);
-        }
-
-        // Insert markers
-        var customers = JSON.parse('@Html.Raw(Session["Customers"])')
-
-            for (var x = 1; x < customers.length; x++) {
-                $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + customers[x].Adress + '&sensor=false', null, function (data) {
-
-                    var p = data.results[0].geometry.location
-                    var latlng = new google.maps.LatLng(p.lat, p.lng);
-                    var marker = new google.maps.Marker({ map: map, position: latlng, clickable: true });
-
-                    marker.info = new google.maps.InfoWindow({
-                        content: customers2[x].Adress
-                    });
-
-                    google.maps.event.addListener(marker, 'click', function () {
-                        marker.info.open(map, marker);
-                    });
-                });
-            }
-        });
-
-    </script>
-}
+        </script>
+    }
