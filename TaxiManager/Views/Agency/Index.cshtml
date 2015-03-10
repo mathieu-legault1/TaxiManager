@@ -13,7 +13,7 @@
         @using (Html.BeginForm("NewCustomer", "Agency", FormMethod.Post, new { id = "customerForm" }))
         {
             <div class="form-group">
-                @Html.TextBoxFor(x => x.Adress, new { @class = "form-control", @id = "txtAddress", @placeholder = "Adresse ..." })
+                @Html.TextBoxFor(x => x.Adress, new { @class = "form-control", @id = "txtAddress", @placeholder = "Adresse ...", @onchange = "setEstimate(this.value);" })
                 @Html.ValidationMessageFor(m => m.Adress)
             </div>
 
@@ -61,11 +61,11 @@
                     var pos = new google.maps.LatLng(position.coords.latitude,
                                                      position.coords.longitude);
 
-                    var infowindow = new google.maps.InfoWindow({
+                    /*var infowindow = new google.maps.InfoWindow({
                         map: map,
                         position: pos,
                         content: 'Vous êtes ici'
-                    });
+                    });*/
 
                     map.setCenter(pos);
                 }, function () {
@@ -168,6 +168,17 @@
                      }
                  }
              );
+        }
+
+        function setEstimate(address) {
+            alert(address);
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'address': address }, function (results, status) {
+
+                if (status == google.maps.GeocoderStatus.OK) {
+                    geocodePosition(results[0].geometry.location);
+                }
+            });
         }
 
         function AddAddressControl(controlDiv, map, center) {
