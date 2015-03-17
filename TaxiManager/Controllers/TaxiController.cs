@@ -15,7 +15,7 @@ namespace TaxiManager.Controllers
         public ActionResult Index()
         {
             SetCustomersInSession();
-
+            SetTaxiInSession();
             return View();
         }
 

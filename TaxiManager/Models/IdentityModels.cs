@@ -9,6 +9,10 @@ namespace TaxiManager.Models
     public class ApplicationUser : IdentityUser
     {
         public string Adress { get; set; }
+        public string CurrentAdress { get; set; }
+        public Status CurrentStatus { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
     }
 
     public class TaxiContext : IdentityDbContext<ApplicationUser>

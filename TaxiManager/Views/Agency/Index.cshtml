@@ -148,6 +148,11 @@
                          $("#txtAddress").val(results[0].formatted_address);
 
                          var service = new google.maps.DistanceMatrixService();
+                         var taxis = JSON.parse('@Html.Raw(Session["Taxis"])');
+                         // lets get the closer taxi available
+                         
+                         // we test their destination address first ...
+                         var validAddress = true;
                          service.getDistanceMatrix({
                              origins: "204 boulevard longpré, laval, QC H7L 3C9, Canada".split(',', 1000),
                              destinations: results[0].formatted_address.split(',', 1000),
@@ -156,15 +161,49 @@
                              avoidHighways: false,
                              avoidTolls: false
                          }, function (response, status) {
-                             if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
-                                 var distance = response.rows[0].elements[0].distance.text;
-                                 var duration = response.rows[0].elements[0].duration.text;
-
-                                 $('#lblTime').text(duration);
-                             } else {
+                             if (!(status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS")) {
+                                 validAddress = false;
                                  alert("Unable to find the distance via road.");
                              }
                          });
+                         
+                         if (!validAddress)
+                             return;
+
+
+                         // their address is valid let's attempt to get the best time
+                         var closestTaxi = null;
+                         var timeClosestTaxi = -1;
+                         $.each(taxis, function (index, item) {
+                             if (item.Status != "OnHold") return true;
+
+                             service.getDistanceMatrix({
+                                 origins: item.CurrentAddress.split(',', 1000),
+                                 destinations: results[0].formatted_address.split(',', 1000),
+                                 travelMode: google.maps.TravelMode.DRIVING,
+                                 unitSystem: google.maps.UnitSystem.METRIC,
+                                 avoidHighways: false,
+                                 avoidTolls: false
+                             }, function (response, status) {
+                                 if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
+                                     var distance = response.rows[0].elements[0].distance.text;
+                                     var duration = response.rows[0].elements[0].duration.text;
+
+                                     if (timeClosestTaxi == -1 || timeClosestTaxi > duration)
+                                         timeClosestTaxi = duration;
+                                 }
+                             });
+                         });
+
+                         if (!closestTaxi) {
+                             $('#lblTime').text("There's currently no available taxi for pickup");
+                             return;
+                         }
+
+                         $('#lblTime').text(timeClosestTaxi);
+                         
+
+
                      }
                  }
              );

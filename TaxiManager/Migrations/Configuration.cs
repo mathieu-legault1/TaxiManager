@@ -33,7 +33,7 @@ namespace TaxiManager.Migrations
             {
                 var store = new UserStore<ApplicationUser>(context);
                 var manager = new UserManager<ApplicationUser>(store);
-                var taxiUser = new ApplicationUser { UserName = "Taxi", Adress = "204 boulevard longpré, laval, QC, H7L 3C9" };
+                var taxiUser = new ApplicationUser { UserName = "Taxi", Adress = "204 boulevard longpré, laval, QC, H7L 3C9", CurrentAdress = "225-325 Rue Ann, Montréal, QC H3C, Canada", CurrentStatus = Status.Offline };
                 var agencyUser = new ApplicationUser { UserName = "Agency" };
 
                 manager.Create(taxiUser, "Taxi123[");

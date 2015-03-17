@@ -10,7 +10,7 @@ using TaxiManager.Models;
 
 namespace TaxiManager.Controllers
 {
-    [Authorize(Roles = "Agency")]
+    //[Authorize(Roles = "Agency")]
     public class AgencyController : BaseController
     {
         // GET: Agency
