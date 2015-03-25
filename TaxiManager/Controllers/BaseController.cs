@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +13,14 @@ namespace TaxiManager.Controllers
 {
     public class BaseController : Controller
     {
-        public TaxiContext db = new TaxiContext();
+        public TaxiContext db;
+        public UserManager<ApplicationUser> mgr;
+
+        public BaseController()
+        {
+            db = new TaxiContext();
+            mgr = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+        }
 
         public void SetCustomersInSession()
         {
@@ -21,26 +30,11 @@ namespace TaxiManager.Controllers
             {
                 try
                 {
-                    // Get latitude and longitude for all current customers
-                    // We need these to call the API
-                    var requestUri = string.Format("http://maps.googleapis.com/maps/api/geocode/xml?address={0}&sensor=false", Uri.EscapeDataString(customer.Adress));
+                    var coordinates = LatLngFromAddress(customer.Adress);
 
-                    var request = WebRequest.Create(requestUri);
-                    var response = request.GetResponse();
-                    var xdoc = new System.Xml.XmlDocument();
-                    xdoc.Load(response.GetResponseStream());
-
-                    var resp = xdoc["GeocodeResponse"];
-                    var result = resp["result"];
-                    var geo = result["geometry"];
-                    var loc = geo["location"];
-                    var lat = loc["lat"].InnerText;
-                    var lng = loc["lng"].InnerText;
-
-                    customer.Latitude = lat;
-                    customer.Longitude = lng;
+                    customer.Latitude = coordinates.Lat;
+                    customer.Longitude = coordinates.Lng;
                 }
-
                 catch (Exception)
                 {
                 }
@@ -48,6 +42,29 @@ namespace TaxiManager.Controllers
 
             // Add customers to session 
             Session["Customers"] = JsonConvert.SerializeObject(customers);
+        }
+
+        public LatLng LatLngFromAddress(string address)
+        {
+            var requestUri = string.Format("http://maps.googleapis.com/maps/api/geocode/xml?address={0}&sensor=false", Uri.EscapeDataString(address));
+
+            var request = WebRequest.Create(requestUri);
+            var response = request.GetResponse();
+            var xdoc = new System.Xml.XmlDocument();
+            xdoc.Load(response.GetResponseStream());
+
+            var resp = xdoc["GeocodeResponse"];
+            var result = resp["result"];
+            var geo = result["geometry"];
+            var loc = geo["location"];
+            var lat = loc["lat"].InnerText;
+            var lng = loc["lng"].InnerText;
+
+            return new LatLng
+            {
+                Lat = lat,
+                Lng = lng
+            };
         }
 
         protected override void Dispose(bool disposing)

@@ -1,7 +1,7 @@
 ﻿@model TaxiManager.Models.Customer
 
 <div class="jumbotron">
-    <h1>Agence.</h1>
+    <h1>Taxi.</h1>
 </div>
 
 <div class="row">
@@ -12,12 +12,12 @@
 
         @using (Html.BeginForm("CustomerAction", "Taxi", FormMethod.Post))
         {
-            @Html.HiddenFor(c => c.CustomerID, new { id = "customerID" })            
+            @Html.HiddenFor(c => c.CustomerID, new { id = "customerID" })
 
             @Html.Label("Prénom :") <label id="lblFirstName"></label><br />
             @Html.Label("Nom :") <label id="lblLastName"></label><br />
             @Html.Label("Adresse :") <label id="lblAddress"></label><br />
-            
+
 
             <div class="form-group">
                 <input type="submit" disabled="disabled" name="submitAction" value="Accepter" id="accept" class="btn btn-success" />
@@ -25,92 +25,93 @@
             </div>
         }
 
-     </div>
+    </div>
 </div>
 
-    @section scripts
+@section scripts
 {
-        <script type="text/javascript">
+    <script type="text/javascript">
 
-            $(document).ready(function () {
-                var map;
-                var elevator;
-                var customers = JSON.parse('@Html.Raw(Session["Customers"])');
-                var myOptions = { zoom: 15 };
+        $(document).ready(function () {
+            var map;
+            var markers = new Array();
+            var directionsDisplay = new google.maps.DirectionsRenderer();;
+            var elevator;
+            var customers = JSON.parse('@Html.Raw(Session["Customers"])');
+            var myOptions = { zoom: 15 };
 
-                map = new google.maps.Map($('#map_canvas')[0], myOptions);
+            map = new google.maps.Map($('#map_canvas')[0], myOptions);
+            directionsDisplay.setMap(map);
 
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(function (position) {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
 
-                        var pos = new google.maps.LatLng(position.coords.latitude,
-                                                         position.coords.longitude);
+                    var pos = new google.maps.LatLng(position.coords.latitude,
+                                                     position.coords.longitude);
 
-                        var infowindow = new google.maps.InfoWindow({
-                            map: map,
-                            position: pos,
-                            content: 'Vous êtes ici'
-                        });
-
-                        map.setCenter(pos);
-                    }, function () {
-                        handleNoGeolocation(true);
-                    });
-                } else {
-                    // Browser doesn't support Geolocation
-                    handleNoGeolocation(false);
-                }
-
-                function handleNoGeolocation(errorFlag) {
-                    if (errorFlag) {
-                        var content = 'Error: The Geolocation service failed.';
-                    } else {
-                        var content = 'Error: Your browser doesn\'t support geolocation.';
-                    }
-
-                    // Set default location to Montreal
-                    var options = {
+                    var infowindow = new google.maps.InfoWindow({
                         map: map,
-                        position: new google.maps.LatLng(45.501689, -73.567256),
-                        content: content
-                    };
-
-                    var infowindow = new google.maps.InfoWindow(options);
-                    map.setCenter(options.position);
-                }
-
-
-                // --------------
-                // load customers
-                // --------------
-                var markers = new Array();
-
-                for (var i = 0; i < customers.length; i++) {
-
-                    var marker = new google.maps.Marker({
-                        position: new google.maps.LatLng(customers[i].Latitude, customers[i].Longitude),
-                        map: map
+                        position: pos,
+                        content: 'Vous êtes ici'
                     });
 
-                    markers.push(marker);
+                    map.setCenter(pos);
+                }, function () {
+                    handleNoGeolocation(true);
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                handleNoGeolocation(false);
+            }
 
-                    google.maps.event.addListener(marker, 'click', (function (marker, i) {
-                        return function () {
-                                                        
-                            if ($('#accept').is(":disabled")) {
-                                $('input[type="submit"]').removeAttr('disabled');
-                            }
-
-                            // Populate customer's details
-                            $('#customerID').val(customers[i].CustomerID);
-                            $('#lblFirstName').text(customers[i].FirstName);
-                            $('#lblLastName').text(customers[i].LastName);
-                            $('#lblAddress').text(customers[i].Adress);
-                        }
-                    })(marker, i));
+            function handleNoGeolocation(errorFlag) {
+                if (errorFlag) {
+                    var content = 'Error: The Geolocation service failed.';
+                } else {
+                    var content = 'Error: Your browser doesn\'t support geolocation.';
                 }
 
-            });
+                // Set default location to Montreal
+                var options = {
+                    map: map,
+                    position: new google.maps.LatLng(45.501689, -73.567256),
+                    content: content
+                };
 
-        </script>
-    }
+                var infowindow = new google.maps.InfoWindow(options);
+                map.setCenter(options.position);
+            }
+
+
+            // --------------
+            // load customers
+            // --------------
+
+            for (var i = 0; i < customers.length; i++) {
+
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(customers[i].Latitude, customers[i].Longitude),
+                    map: map
+                });
+
+                markers.push(marker);
+
+                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                    return function () {
+
+                        if ($('#accept').is(":disabled")) {
+                            $('input[type="submit"]').removeAttr('disabled');
+                        }
+
+                        // Populate customer's details
+                        $('#customerID').val(customers[i].CustomerID);
+                        $('#lblFirstName').text(customers[i].FirstName);
+                        $('#lblLastName').text(customers[i].LastName);
+                        $('#lblAddress').text(customers[i].Adress);
+                    }
+                })(marker, i));
+            }
+        });
+
+    </script>
+}

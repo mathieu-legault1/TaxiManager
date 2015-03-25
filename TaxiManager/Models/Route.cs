@@ -39,4 +39,17 @@ namespace TaxiManager.Models
         public string ApplicationUserId { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
     }
+
+    public class LatLng
+    {
+        public string Lat { get; set; }
+
+        public string Lng { get; set; }
+    }
+
+    public class RouteViewModel
+    {
+        public LatLng TaxiLatLng { get; set; }
+        public LatLng CustomerLatLng { get; set; }
+    }
 }

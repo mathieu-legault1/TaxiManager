@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,8 @@ namespace TaxiManager.Controllers
 {
     [Authorize(Roles="Taxi")]
     public class TaxiController : BaseController
-    {        
+    {
+
         // GET: Taxi
         public ActionResult Index()
         {
@@ -25,7 +28,7 @@ namespace TaxiManager.Controllers
             {
                 case "Accepter":
 
-                    return (NewRoute(customerID));
+                    return (Route(customerID));
                 case "Refuser":
 
                     return (Delete(customerID));
@@ -34,11 +37,33 @@ namespace TaxiManager.Controllers
             return View("Index");
         }
 
-        public ActionResult NewRoute(int id)
+        public ActionResult Route(int id)
         {
+            var currentUser = mgr.FindByName<ApplicationUser>(User.Identity.Name);
+            var customer = db.Customers.Find(id);
 
+            if(currentUser != null && customer != null)
+            {
+                Route route = new Route
+                {
+                    ApplicationUser = currentUser,
+                    DepartureDate = DateTime.Now,
+                    Customer = db.Customers.Find(id)         
+                };
 
-            return RedirectToAction("Index");
+                var model = new RouteViewModel
+                {
+                    CustomerLatLng = LatLngFromAddress(customer.Adress),
+                    TaxiLatLng = LatLngFromAddress(currentUser.Adress)
+                };
+
+                db.Customers.Remove(customer);
+                db.SaveChanges();
+
+                return View("Route", model);
+            }
+
+            return View();
         }
 
         public ActionResult Delete(int id)

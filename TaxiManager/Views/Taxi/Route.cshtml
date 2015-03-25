@@ -1,0 +1,56 @@
+﻿@model TaxiManager.Models.RouteViewModel
+
+<div class="jumbotron">
+    <h1>Route.</h1>
+</div>
+
+<div class="row">
+    <div style="height:500px;padding-left:15px;" id="map_canvas" class="col-sm-12 col-md-12 col-lg-9">
+    </div>
+
+    <div id="" class="col-sm-12 col-md-12 col-lg-3">
+
+        @Model.TaxiLatLng.Lat
+        @Model.TaxiLatLng.Lng
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            var map;
+            var markers = new Array();
+            var directionsDisplay = new google.maps.DirectionsRenderer();
+            var myOptions = { zoom: 15 };
+
+            map = new google.maps.Map($('#map_canvas')[0], myOptions);
+            directionsDisplay.setMap(map);
+
+            // --------------
+            // load customers
+            // --------------
+
+            var service = new google.maps.DirectionsService();
+            var start = new google.maps.LatLng(@Model.TaxiLatLng.Lat, @Model.TaxiLatLng.Lng);
+            var end = new google.maps.LatLng(@Model.CustomerLatLng.Lat, @Model.CustomerLatLng.Lng);
+
+            var request = {
+                origin: start,
+                destination: end,
+                travelMode: google.maps.TravelMode.DRIVING
+            };
+            service.route(request, function (response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(response);
+                    directionsDisplay.setMap(map);
+                } else {
+                    alert("Directions Request from " + start.toUrlValue(6) + " to " + end.toUrlValue(6) + " failed: " + status);
+                }
+            });
+
+        });
+
+    </script>
+}
