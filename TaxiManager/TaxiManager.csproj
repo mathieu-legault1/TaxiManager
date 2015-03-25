@@ -230,6 +230,7 @@
     <Content Include="Views\Agency\Index.cshtml" />
     <Content Include="Views\Taxi\Index.cshtml" />
     <Content Include="Views\Taxi\Route.cshtml" />
+    <Content Include="Views\Taxi\ClientRoute.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

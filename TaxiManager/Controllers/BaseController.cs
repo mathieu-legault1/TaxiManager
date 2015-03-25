@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Web.Mvc;
+using System.Xml;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Newtonsoft.Json;
 using TaxiManager.Models;
 
 namespace TaxiManager.Controllers
@@ -50,7 +49,7 @@ namespace TaxiManager.Controllers
 
             var request = WebRequest.Create(requestUri);
             var response = request.GetResponse();
-            var xdoc = new System.Xml.XmlDocument();
+            var xdoc = new XmlDocument();
             xdoc.Load(response.GetResponseStream());
 
             var resp = xdoc["GeocodeResponse"];

@@ -1,17 +1,25 @@
-﻿@model TaxiManager.Models.RouteViewModel
+﻿@using Microsoft.Web.Mvc
+@model TaxiManager.Models.RouteViewModel
 
 <div class="jumbotron">
     <h1>Route.</h1>
 </div>
 
 <div class="row">
-    <div style="height:500px;padding-left:15px;" id="map_canvas" class="col-sm-12 col-md-12 col-lg-9">
+    <div style="height: 500px; padding-left: 15px;" id="map_canvas" class="col-sm-12 col-md-12 col-lg-9">
     </div>
 
     <div id="" class="col-sm-12 col-md-12 col-lg-3">
 
-        @Model.TaxiLatLng.Lat
-        @Model.TaxiLatLng.Lng
+        @using (Html.BeginForm("EndRoute", "Taxi", new { routeID = @Model.RouteID }, FormMethod.Post))
+        {
+            <input type="text" class="form-control" id="clientAddr" placeholder="Adresse du client"><br />
+
+            <div class="form-group">
+                <button type="button" id="btnRouteClient" class="btn btn-default">Reconduire le client</button>
+                <button type="submit" id="btnArrivalClient" class="btn btn-success">Terminé</button>
+            </div>
+        }
     </div>
 </div>
 
@@ -19,13 +27,11 @@
 {
     <script type="text/javascript">
 
-        $(document).ready(function () {
-            var map;
-            var markers = new Array();
+        $(document).ready(function() {
             var directionsDisplay = new google.maps.DirectionsRenderer();
             var myOptions = { zoom: 15 };
 
-            map = new google.maps.Map($('#map_canvas')[0], myOptions);
+            var map = new google.maps.Map($('#map_canvas')[0], myOptions);
             directionsDisplay.setMap(map);
 
             // --------------
@@ -41,14 +47,46 @@
                 destination: end,
                 travelMode: google.maps.TravelMode.DRIVING
             };
-            service.route(request, function (response, status) {
+
+            service.route(request, function(response, status) {
                 if (status == google.maps.DirectionsStatus.OK) {
                     directionsDisplay.setDirections(response);
                     directionsDisplay.setMap(map);
                 } else {
-                    alert("Directions Request from " + start.toUrlValue(6) + " to " + end.toUrlValue(6) + " failed: " + status);
+                    sweetAlert("Erreur", "Adresse invalide.", "error");
                 }
             });
+
+            $('#btnArrivalClient').click(function() {
+                $(":button").removeAttr("disabled");
+                $(":submit").removeAttr("disabled");
+            });
+
+            $('#btnRouteClient').click(function() {
+
+                start = end;
+                var clientAddress;
+
+                $.get("TaxiArrival", { routeID: @Model.RouteID, clientAddress: $('#clientAddr').val() }, function(data) {
+                    clientAddress = new google.maps.LatLng(data.lat, data.lng);
+
+                    var request = {
+                        origin: start,
+                        destination: clientAddress,
+                        travelMode: google.maps.TravelMode.DRIVING
+                    };
+
+                    service.route(request, function(response, status) {
+                        if (status == google.maps.DirectionsStatus.OK) {
+                            directionsDisplay.setDirections(response);
+                            directionsDisplay.setMap(map);
+                        } else {
+                            sweetAlert("Erreur", "Adresse invalide.", "error");
+                        }
+                    });
+                });
+            });
+
 
         });
 
