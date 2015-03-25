@@ -13,11 +13,11 @@
 
         @using (Html.BeginForm("EndRoute", "Taxi", new { routeID = @Model.RouteID }, FormMethod.Post))
         {
-            <input type="text" class="form-control" id="clientAddr" placeholder="Adresse du client">
+            <input type="text" class="form-control" id="clientAddr" placeholder="Adresse du client"><br />
 
             <div class="form-group">
-                <button type="button" id="btnRouteClient" class="btn btn-warning">Reconduire le client</button> 
-                <button type="submit" id="btnArrivalClient" class="btn btn-success">Route terminé</button>
+                <button type="button" id="btnRouteClient" class="btn btn-default">Reconduire le client</button>
+                <button type="submit" id="btnArrivalClient" class="btn btn-success">Terminé</button>
             </div>
         }
     </div>
