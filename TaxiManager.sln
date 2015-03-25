@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxiManager", "TaxiManager\TaxiManager.csproj", "{95F6F653-9626-4A6F-BCA3-E191EA13F325}"
 EndProject
@@ -9,7 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxiManagerTests", "TaxiMan
 EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "Modeling", "Modeling\Modeling.modelproj", "{A4415F50-D90A-4F39-9B9E-1708AC174B56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUITaxiManager", "TestUITaxiManager\TestUITaxiManager.csproj", "{E6169347-0D28-499E-911D-33C60D4EE07A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxiManagerTestUI", "TaxiManagerTestUI\TaxiManagerTestUI.csproj", "{5C3D5DDE-BA2B-4956-A095-BD241DDEF0EE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{77933DE1-8477-485F-95DA-F828B21E9B61}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +34,10 @@ Global
 		{A4415F50-D90A-4F39-9B9E-1708AC174B56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4415F50-D90A-4F39-9B9E-1708AC174B56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4415F50-D90A-4F39-9B9E-1708AC174B56}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E6169347-0D28-499E-911D-33C60D4EE07A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E6169347-0D28-499E-911D-33C60D4EE07A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E6169347-0D28-499E-911D-33C60D4EE07A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E6169347-0D28-499E-911D-33C60D4EE07A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C3D5DDE-BA2B-4956-A095-BD241DDEF0EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C3D5DDE-BA2B-4956-A095-BD241DDEF0EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C3D5DDE-BA2B-4956-A095-BD241DDEF0EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C3D5DDE-BA2B-4956-A095-BD241DDEF0EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
