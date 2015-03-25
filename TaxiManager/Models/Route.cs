@@ -34,10 +34,10 @@ namespace TaxiManager.Models
         public Nullable<DateTime> RecoveryDate { get; set; }
 
         public int CustomerID { get; set; }
-        public virtual Customer Customer { get; set; }
+        //public virtual Customer Customer { get; set; }
 
-        public string ApplicationUserId { get; set; }
-        public virtual ApplicationUser ApplicationUser { get; set; }
+        public string ApplicationUserID { get; set; }
+        //public virtual ApplicationUser ApplicationUser { get; set; }
     }
 
     public class LatLng
@@ -49,6 +49,7 @@ namespace TaxiManager.Models
 
     public class RouteViewModel
     {
+        public int RouteID { get; set; }
         public LatLng TaxiLatLng { get; set; }
         public LatLng CustomerLatLng { get; set; }
     }
