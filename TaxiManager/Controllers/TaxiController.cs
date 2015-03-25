@@ -1,11 +1,6 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using TaxiManager.Models;
 
 namespace TaxiManager.Controllers
@@ -39,7 +34,7 @@ namespace TaxiManager.Controllers
 
         public ActionResult Route(int id)
         {
-            var currentUser = mgr.FindByName<ApplicationUser>(User.Identity.Name);
+            var currentUser = mgr.FindByName(User.Identity.Name);
             var customer = db.Customers.Find(id);
 
             if(currentUser != null && customer != null)
