@@ -60,7 +60,10 @@
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestExigenceFonctionnel1.cs" />
+    <Compile Include="TestExigenceFonctionnel2.cs" />
     <Compile Include="TestExigenceFonctionnel5.cs" />
+    <Compile Include="TestExigenceFonctionnel6.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -70,7 +73,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Lib\Interop.SHDocVw.dll" />
     <Content Include="Lib\nunit.framework.dll" />
     <Content Include="Lib\nunit.framework.xml" />
     <Content Include="Lib\WatiN.Core.dll" />
