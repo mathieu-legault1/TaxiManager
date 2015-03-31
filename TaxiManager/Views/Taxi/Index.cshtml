@@ -34,8 +34,7 @@
         $(document).ready(function () {
             var map;
             var markers = new Array();
-            var directionsDisplay = new google.maps.DirectionsRenderer();;
-            var elevator;
+            var directionsDisplay = new google.maps.DirectionsRenderer();
             var customers = JSON.parse('@Html.Raw(Session["Customers"])');
             var myOptions = { zoom: 15 };
 
@@ -104,9 +103,15 @@
 
                         // Populate customer's details
                         $('#customerID').val(customers[i].CustomerID);
-                        $('#lblFirstName').text(customers[i].FirstName);
-                        $('#lblLastName').text(customers[i].LastName);
-                        $('#lblAddress').text(customers[i].Adress);
+                        if (customers[i].FirstName) {
+                            $('#lblFirstName').text(customers[i].FirstName);
+                        }
+                        if (customers[i].LastName) {
+                            $('#lblLastName').text(customers[i].LastName);
+                        }
+                        if (customers[i].Adress) {
+                            $('#lblAddress').text(customers[i].Adress);
+                        }
                     }
                 })(marker, i));
             }

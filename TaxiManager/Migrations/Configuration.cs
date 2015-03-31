@@ -1,23 +1,23 @@
 namespace TaxiManager.Migrations
 {
-	using Microsoft.AspNet.Identity;
-	using Microsoft.AspNet.Identity.EntityFramework;
-	using System;
-	using System.Data.Entity;
-	using System.Data.Entity.Migrations;
-	using System.Linq;
-	using TaxiManager.Models;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Migrations;
+    using System.Linq;
+    using TaxiManager.Models;
 
     internal sealed class Configuration : DbMigrationsConfiguration<TaxiContext>
-	{
-		public Configuration()
-		{
-			AutomaticMigrationsEnabled = true;
+    {
+        public Configuration()
+        {
+            AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = true;
-		}
+        }
 
         protected override void Seed(TaxiContext context)
-		{
+        {
             // Roles
             if (!context.Roles.Any(r => r.Name == "Taxi"))
             {
@@ -33,15 +33,19 @@ namespace TaxiManager.Migrations
             {
                 var store = new UserStore<ApplicationUser>(context);
                 var manager = new UserManager<ApplicationUser>(store);
-                var taxiUser = new ApplicationUser { UserName = "Taxi", Adress = "204 boulevard longpré, laval, QC, H7L 3C9", CurrentAdress = "225-325 Rue Ann, Montréal, QC H3C, Canada", CurrentStatus = Status.Offline };
+                var taxiUser = new ApplicationUser { UserName = "Taxi", Adress = "204 boulevard longpré, laval, QC, H7L 3C9", CurrentAdress = "204 boulevard longpré, laval, QC, H7L 3C9", CurrentStatus = Status.OnHold };
+                var taxiUser2 = new ApplicationUser { UserName = "Taxi2", Adress = "204 boulevard longpré, laval, QC, H7L 3C9", CurrentAdress = "625 Boulevard Curé-Labelle, Laval, QC H7L 5R7", CurrentStatus = Status.OnHold };
                 var agencyUser = new ApplicationUser { UserName = "Agency" };
 
                 manager.Create(taxiUser, "Taxi123[");
                 manager.AddToRole(taxiUser.Id, "Taxi");
 
+                manager.Create(taxiUser2, "Taxi123[");
+                manager.AddToRole(taxiUser2.Id, "Taxi");
+
                 manager.Create(agencyUser, "Agency123[");
                 manager.AddToRole(agencyUser.Id, "Agency");
             }
-		}
-	}
+        }
+    }
 }

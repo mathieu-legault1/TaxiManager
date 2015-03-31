@@ -8,6 +8,8 @@ namespace TaxiManager.Controllers
     {        
         public ActionResult Index()
         {
+            ViewBag.Title = "Taxi Manager";
+
             // The user is already connected.
             if (!HttpContext.User.Identity.IsAuthenticated) return View();
             if(User.IsInRole("Taxi"))
