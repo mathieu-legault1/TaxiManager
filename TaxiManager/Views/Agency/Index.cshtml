@@ -26,16 +26,6 @@
                 @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", @placeholder = "Nom ..." })
                 @Html.ValidationMessageFor(m => m.LastName)
             </div>
-
-            <div class="form-group">
-                @Html.TextBoxFor(x => x.Age, new { @class = "form-control", @placeholder = "Age ..." })
-                @Html.ValidationMessageFor(m => m.Age)
-            </div>
-            
-            <div class="form-group">
-                @Html.TextBoxFor(x => x.PhoneNumber, new { @class = "form-control", @placeholder = "Phone number ..." })
-                @Html.ValidationMessageFor(m => m.PhoneNumber)
-            </div>
             
             <label>temps estimé</label>
             <label id="lblTime"></label>
@@ -125,13 +115,11 @@
                     return function () {
 
                         var content = "";
-                        if (customers[i].FirstName != null && customers[i].LastName != null && customers[i].Age) {
+                        if (customers[i].FirstName != null && customers[i].LastName != null) {
                             content = "<b>" + customers[i].FirstName + " "
                                 + customers[i].LastName
                                 + "</b><br>"
-                                + customers[i].Adress
-                                + "</b><br>"
-                                + customers[i].Age;
+                                + customers[i].Adress;
                         } else {
                             content = customers[i].Adress;
                         }
