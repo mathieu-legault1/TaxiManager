@@ -169,6 +169,7 @@
     <Compile Include="Controllers\AgencyController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StatistiquesController.cs" />
     <Compile Include="Controllers\TaxiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -178,6 +179,7 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Route.cs" />
+    <Compile Include="Models\StatistiquesViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -230,7 +232,7 @@
     <Content Include="Views\Agency\Index.cshtml" />
     <Content Include="Views\Taxi\Index.cshtml" />
     <Content Include="Views\Taxi\Route.cshtml" />
-    <Content Include="Views\Taxi\ClientRoute.cshtml" />
+    <Content Include="Views\Statistiques\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<TaxiManager.Models.RoutesViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Statistiques</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Route.DepartureDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Route.RecoveryDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Route.ArrivalDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Taxi.UserName)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Route.DepartureDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Route.RecoveryDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Route.ArrivalDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Taxi.UserName)
+        </td>
+    </tr>
+}
+
+</table>
