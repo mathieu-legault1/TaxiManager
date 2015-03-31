@@ -9,10 +9,10 @@ using WatiN.Core;
 namespace TaxiManagerTestUI
 {
     [TestFixture, RequiresSTA]
-    class TestExigenceFonctionnel6: BaseTest
+    class TestExigenceFonctionnel4 : BaseTest
     {
         [Test]
-        public void Test_Projet_STP_TC_5()
+        public void Test_Projet_STP_TC_1()
         {
             using (IE browser = this.LoginAgency())
             {
@@ -21,12 +21,12 @@ namespace TaxiManagerTestUI
                 browser.WaitForComplete();
 
                 // Remplie les textfield
-                browser.TextField(Find.ByName("Adress")).TypeText("1100 rue Notre-Dame Ouest, Montréal");
+                browser.TextField(Find.ByName("Adress")).TypeText("1100 rue Notre-Dame Ouest");
                 browser.TextField(Find.ByName("FirstName")).TypeText("Blos");
                 browser.TextField(Find.ByName("LastName")).TypeText("Joe");
                 // Catch l'adresse dans le systeme
                 var searchAdress = browser.TextField(Find.ByName("Adress")).Text;
-                Assert.True(searchAdress.Equals("1120 Rue Notre Dame Ouest, Montréal, QC H3C 0J8, Canada"));
+                Assert.True(searchAdress.Equals("1100, rue Notre-Dame Ouest, Montréal, Québec, Canada, H3C 1K3"));
 
                 // Click nouveau client
                 browser.Button(Find.ByValue("Nouveau client")).Click();
