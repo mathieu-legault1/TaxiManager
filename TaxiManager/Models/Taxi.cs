@@ -12,7 +12,7 @@ namespace TaxiManager.Models
     {
         public Taxi()
         {
-            Status = Status.Offline;
+            Status = Status.OnHold;
         }
 
         [Key]
