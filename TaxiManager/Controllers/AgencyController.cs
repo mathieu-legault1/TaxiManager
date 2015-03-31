@@ -3,14 +3,14 @@ using TaxiManager.Models;
 
 namespace TaxiManager.Controllers
 {
-    [Authorize(Roles = "Agency")]
+    //[Authorize(Roles = "Agency")]
     public class AgencyController : BaseController
     {
         // GET: Agency
         public ActionResult Index()
         {
             SetCustomersInSession();
-
+            SetTaxiInSession();
             return View();
         }
 

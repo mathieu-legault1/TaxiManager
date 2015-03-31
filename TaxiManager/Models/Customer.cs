@@ -9,9 +9,12 @@ namespace TaxiManager.Models
 {
     public enum Status
     {
+        Offline, // Le taxi n'est pas disponible.
         OnHold, // En attente de la confirmation d'un taxi
         Accepted, // Le client a été accepté par un taxi
+        GetClient, // Le taxi est en train d'aller chercher le client
         Denied, // Le client a été refusé par un taxi
+        pickUp, // Le taxi est arrivé au client
         OnTheWay, // Le client est dans le taxi
         Arrived, // Le client a été reconduit.
     }
